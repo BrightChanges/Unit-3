@@ -101,3 +101,7 @@ class MinimumBalanceAccount(BankAccount):
             BankAccount.withdraw(self, amount)
 
 ```
+We have two classes BankAccount and MinimumBalanceAccount, which is a class that is inherited from the class BankAccount. To initialize an object for the class BankAccount, we don't need to input anything. With 1 input, we can use the 2 methods of class BankAccount: withdraw() and deposit(). To initialize an object for the class MinimumBalanceAccount, we need to input 1 variable: minimum_balance. To use its 1 method withdraw(), we also need to input 1 variable: amount.
+
+Below is the UML class diagram for the codes:
+![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_4526.jpg)
