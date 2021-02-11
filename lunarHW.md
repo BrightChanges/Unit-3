@@ -37,3 +37,7 @@ VALUES
 
 
 ```
+
+## 3.Create the UML class diagram for the db
+![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_4731.jpg)
+
