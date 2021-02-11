@@ -108,6 +108,6 @@ s.close()
 ![](https://github.com/BrightChanges/Unit-3/blob/main/Screen%20Shot%200003-02-11%20at%201.48.08%20PM.png)
 
 ## 5.Research what Hash functions are and think how they could be used to improve the security of the private data in the database
-
+Hashing is a one-way function that is very useful for protecting password in a system. It is a function that scrambles the password into a nonsense string. By doing this, even if the system database with the passwords are exposed, people can't still understand and know what the password is. The way hashing function check for a correct password is by hashing it the same way it had alway hashed. If the hashed password is the same as the password in the database, the password is correct and the user authentication process is completed. Hashing is better and more secure than Encryption because it doesn't need a decryption key, a data that could be exposed, like Encryption does. Instead, hashing is a built-in function that has a preset hashing rules that cannot be exposed.
 
 
