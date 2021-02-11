@@ -41,3 +41,65 @@ VALUES
 ## 3.Create the UML class diagram for the db
 ![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_4731.jpg)
 
+
+## 4.Create the database using ORM and add some sample users
+
+-Python codes:
+
+```.py
+
+from sqlalchemy import Column, DateTime, String, Integer, ForeignKey
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship
+
+Base = declarative_base()
+
+class User(Base):
+    __tablename__ = 'user'
+    id = Column(Integer, primary_key=True)
+    email = Column(String(100), primary_key=True)
+    username = Column(String(100))
+    password = Column(String(250))
+    #relationship "writes in the ER diagram" one-to-many
+    posts = relationship("Snack", backref="customer") #Post is referencing to the class Post below
+
+    def __repr__(self):
+        return f"<User with username {self.username} with email {self.email}>"
+
+class Snack(Base):
+    __tablename__ = "snack"
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'))
+    name = Column(String)
+    amount = Column(Integer)
+
+from sqlalchemy import create_engine
+engine = create_engine('sqlite:///ORM_HW')
+
+from sqlalchemy.orm import sessionmaker
+session = sessionmaker()
+session.configure(bind=engine)
+Base.metadata.create_all(engine)
+
+
+s = session()
+
+## Add some users into the User table
+
+user1 = User(id=1,email="2022.kien.letrung@uwcisak.jp",username='Kien Le Trung', password='isak123')
+user2 = User(id=2,email="2022.owenchen@uwcisak.jp",username='Owen Chen', password='rice256')
+user3 = User(id=3,email="junpei@gmail.com",username='Junpei', password='riseyeah')
+s.add(user3)
+s.commit()
+
+s.close()
+
+```
+-Image of the Python codes:
+![]()
+
+-Image1 of the database created by this ORM-Python codes:
+![]()
+
+-Image2 of the database created by this ORM-Python codes:
+![]()
