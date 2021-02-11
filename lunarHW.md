@@ -3,7 +3,7 @@
 
 ## 2.Create the SQL script to create the database and add some sample users:
 
-```.sqlite
+```.py
 
 CREATE TABLE IF NOT EXISTS User (
 	id integer,
