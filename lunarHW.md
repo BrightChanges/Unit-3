@@ -96,10 +96,14 @@ s.close()
 
 ```
 -Image of the Python codes:
-![]()
+![](https://github.com/BrightChanges/Unit-3/blob/main/Screen%20Shot%200003-02-11%20at%201.47.28%20PM.png)
 
--Image1 of the database created by this ORM-Python codes:
-![]()
+-Image1 of the database created by this ORM-Python codes (showing the database structure):
+![](https://github.com/BrightChanges/Unit-3/blob/main/Screen%20Shot%200003-02-11%20at%201.47.52%20PM.png)
 
--Image2 of the database created by this ORM-Python codes:
-![]()
+-Image2 of the database created by this ORM-Python codes (showing the sample users):
+![](https://github.com/BrightChanges/Unit-3/blob/main/Screen%20Shot%200003-02-11%20at%201.48.08%20PM.png)
+
+## 5.Research what Hash functions are and think how they could be used to improve the security of the private data in the database
+
+
