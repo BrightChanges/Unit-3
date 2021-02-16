@@ -7,6 +7,7 @@
 ##### 1.OOP:
 
 -Pseudocodes:
+
 ![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_4767.jpg)
 
 -Codes:
@@ -38,10 +39,12 @@ print(test3.find_answers())
 ```
 
 -Testing:
+
 ![](https://github.com/BrightChanges/Unit-3/blob/main/Screen%20Shot%200003-02-16%20at%2012.15.05%20PM.png)
 
 ##### 2. Normal functions:
 -Pseudocodes:
+
 ![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_4768.jpg)
 
 -Codes:
@@ -66,4 +69,5 @@ print(test3)
 ```
 
 -Testing:
+
 ![](https://github.com/BrightChanges/Unit-3/blob/main/Screen%20Shot%200003-02-16%20at%2012.15.09%20PM.png)
