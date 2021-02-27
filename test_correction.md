@@ -3,7 +3,7 @@ https://docs.google.com/document/d/1lmmFEQ1UN7NRnGZGhXE6tGXgBouqHg7d2GlR8s32UVM/
 
 #### My redo:
 
-![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_4807.JPG)
+![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_4809.JPG)
 
 ![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_4808.JPG)
 
