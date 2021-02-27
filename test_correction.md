@@ -87,3 +87,50 @@ simulate(NEURON,CUR_OUTPUT,NUM_INPUTS,SOURCE,STRENGTH)
 
 
 ```
+
+3st version (looks like the test's codes, but having the same problem as the 2st version above):
+
+```.py
+
+NEURON = [1,2,3,4]
+CUR_OUTPUT = [0.5,0.2,0.2, -0.1]
+NUM_INPUTS = [1,2,2,1]
+SOURCE = [4,1,3,1,2,1]
+STRENGTH = [-0.1, 0.5, -0.4, 0.3, -0.4, 0.2]
+
+class simulate():
+
+    def __init__(self,NEURON, CUR_OUTPUT, NUM_INPUTS, STRENGTH, SOURCE):
+        self.NEURON = NEURON
+        self.CUR_OUTPUT = CUR_OUTPUT
+        self.NUM_INPUTS = NUM_INPUTS
+        self.STRENGTH = STRENGTH
+        self.SOURCE = SOURCE
+
+    def check_input(self):
+        start_idx = 0
+        for n in range(len(self.NEURON)):
+            end_idx = start_idx + self.NUM_INPUTS[n]
+            out = 0.0
+            for k in range(start_idx,(end_idx-1)):
+                tempt = get_index(self.SOURCE[k]) #get_index is a function that I will need to create
+                out += self.STRENGTH[tempt] * self.CUR_OUTPUT[tempt]
+            self.CUR_OUTPUT[n] = out
+            start_idx = end_idx
+            print("Output of neuron id", self.NEURON[n], "is", out)
+
+        return CUR_OUTPUT
+
+    print("Error in the initialization")
+
+
+def get_index(id):
+    for i in range(len(NEURON)):
+        if NEURON[i] == id:
+            return i
+
+
+object = simulate(NEURON,CUR_OUTPUT,NUM_INPUTS,SOURCE,STRENGTH)
+object.check_input()
+
+```
