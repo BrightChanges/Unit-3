@@ -20,6 +20,8 @@ Fig.2 Other sketches of TimeJoint
 ## Criteria B: Design
 #### System Diagram
 
+![](https://github.com/BrightChanges/Unit-3/blob/main/TimeJoint_systemdiagram%20(1).png)
+
 
 #### Flow Diagram of the priority-algorithm
 
