@@ -13,25 +13,27 @@ class StringN():
         self.N = N
 
     def do_function(self):
-
+        #because I will use result in multiplication, i cannot set it equal to 0 because
+        #that will turn all the result of the multiplication to 0.
         result = 1
+
+        #initialize other necessary variables that I could changes using for loops later on:
         step = 1
         new_string = ""
 
         for i in range(len(self.N)):
             result *= int(self.N[i])
             new_string = str(result)
-       
-
-    #convert new_string to a list, splitting each integer into 1 value:
-        list_new_string = list(new_string)
 
 
+        #when result>9, the string N or new_string(updated value of string N after each multiplication)
+        #contains 2 digits, which could be used for multiplication.
+        # a string with 1 digit cannot be used for multiplication.
         while result > 9:
-            for i in range(len(list_new_string)):
+            for i in range(len(new_string)):
                 step +=1
                 result = 1
-                result *= int(list_new_string[i])
+                result *= int(new_string[i])
 
         print(step)
 
