@@ -25,7 +25,7 @@ Fig.2 Other sketches of TimeJoint
 
 #### Flow Diagram of the priority-algorithm
 
-![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_0044.heic)
+![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_0044.jpg)
 
 
 ## Criteria C: Development
