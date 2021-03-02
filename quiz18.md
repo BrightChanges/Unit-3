@@ -19,10 +19,9 @@ class StringN():
         new_string = ""
 
         for i in range(len(self.N)):
-            # print(int(N[i]))
             result *= int(self.N[i])
             new_string = str(result)
-        # print(new_string)
+       
 
     #convert new_string to a list, splitting each integer into 1 value:
         list_new_string = list(new_string)
