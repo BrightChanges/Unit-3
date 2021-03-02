@@ -69,6 +69,8 @@ food = ["bread","pizza", "pho"]
 liquer = ["bear", "juice", "Cola"]
 electronics = ["ipad", "iphone", "macbook"]
 
+
+
 def total(items,prices):
     tax = 0
     print("Your input is:{},{}".format(items, prices))
@@ -82,14 +84,12 @@ def total(items,prices):
         elif items[i] in liquer:
             price = prices[i] * 120/100
             tax += price
-            
-        #The codes below are able to let the user to add and calculate
-        #items that is not pre-added in the 3 lists:
+        # The codes below are able to let the user to add and calculate
+        # items that is not pre-added in the 3 lists:
         else:
             user_input = input("Which category is {}? Please choose by typing in 1 of the"
                                "following 3 categories: food, liquer, electronics:".format(items[i]))
-                               
-            #this codes remove the capitalized input problem:
+            # this codes remove the capitalized input problem:
             if user_input != "Food" and user_input != "food" and user_input !="Liquer" and user_input != "liquer" and user_input != "Electronics" and user_input != "electronics":
                 print("Please restart the program. You had entered an invalid category" "for {}. The tax shown below IS NOT ACCURATE. PLEASE RESTART".format(items[i]))
                 break
@@ -100,36 +100,20 @@ def total(items,prices):
                 if items[i] in food:
                     price = prices[i] * 110 / 100
                     tax += price
-                elif items[i] in electronics:
-                    price = prices[i] * 115 / 100
-                    tax += price
-                elif items[i] in liquer:
-                    price = prices[i] * 120 / 100
-                    tax += price
+
 
             elif user_input == "Liquer" or "liquer":
                 liquer.append(items[i])
-                if items[i] in food:
-                    price = prices[i] * 110 / 100
-                    tax += price
-                elif items[i] in electronics:
-                    price = prices[i] * 115 / 100
-                    tax += price
-                elif items[i] in liquer:
+                if items[i] in liquer:
                     price = prices[i] * 120 / 100
                     tax += price
 
             elif user_input == "Electronics" or "electronics":
                 electronics.append(items[i])
-                if items[i] in food:
-                    price = prices[i] * 110 / 100
-                    tax += price
-                elif items[i] in electronics:
+                if items[i] in electronics:
                     price = prices[i] * 115 / 100
                     tax += price
-                elif items[i] in liquer:
-                    price = prices[i] * 120 / 100
-                    tax += price
+
 
 
     return tax
@@ -137,5 +121,6 @@ def total(items,prices):
 #testing:
 test1= total(["bread","bear","ipad", "apple"],[300,800,30000,5000])
 print(test1)
+
 
 ```
