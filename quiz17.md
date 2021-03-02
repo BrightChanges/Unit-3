@@ -13,13 +13,17 @@
 -Codes:
 ```.py
 
-class evenlySpaced():
+#CONTEXT: Given three ints, a b c, one of them is small, one is medium and one is large.
+# Return true if the three values are evenly spaced, so the difference between small and
+# medium is the same as the difference between medium and large
 
+class evenlySpaced():
+    #initialize the class:
     def __init__(self, small, medium, large):
         self.small:int = small
         self.medium:int = medium
         self.large:int = large
-
+    #the algorithms that will check if values are evenly spaced:
     def find_answers(self):
         if (((self.large-self.medium)%(self.medium-self.small))==0):
 
@@ -27,14 +31,16 @@ class evenlySpaced():
         return False
 
 
-
+#testing:
 test1=evenlySpaced(2,4,6)
 test2=evenlySpaced(4,6,2)
 test3=evenlySpaced(4,6,3)
+test4=evenlySpaced(5,10,21)
 
 print(test1.find_answers())
 print(test2.find_answers())
 print(test3.find_answers())
+print(test4.find_answers())
 
 ```
 
