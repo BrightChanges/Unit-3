@@ -7,6 +7,9 @@
 
 ```.py
 
+#CONTEXT: Given a number as a String N. Multiply all the digits of N, and repeat the same with the product 
+# obtained till the product consists of only one digit. Output the number of steps taken to do so.
+
 class StringN():
 
     def __init__(self,N):
@@ -37,7 +40,7 @@ class StringN():
 
         print(step)
 
-#testing:
+#testing
 test1=StringN("39").do_function()
 
 ```
