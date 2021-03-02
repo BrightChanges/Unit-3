@@ -12,6 +12,9 @@
 
 ```.py
 
+#CONTEXT: Given an array of food items and price, calculate the total price based on the table of tax categories below: 
+
+#initialize the lists with pre-set values:
 food = ["bread","pizza", "pho"]
 liquer = ["bear", "juice", "Cola"]
 electronics = ["ipad", "iphone", "macbook"]
@@ -19,7 +22,12 @@ electronics = ["ipad", "iphone", "macbook"]
 def total(items,prices):
     tax = 0
     print(items, prices)
+    
+    #looping through the items, checking if the item
+    #is in any of the 3 lists above
     for i in range(len(items)):
+        #value in different list
+        #needs to be calculated for tax differently: 
         if items[i] in food:
             price = prices[i] * 110/100
             tax += price
@@ -32,6 +40,7 @@ def total(items,prices):
 
     return tax
 
+#testing:
 test1= total(["bread","bear","ipad"],[300,800,30000])
 print(test1)
 
@@ -73,10 +82,14 @@ def total(items,prices):
         elif items[i] in liquer:
             price = prices[i] * 120/100
             tax += price
+            
+        #The codes below are able to let the user to add and calculate
+        #items that is not pre-added in the 3 lists:
         else:
             user_input = input("Which category is {}? Please choose by typing in 1 of the"
                                "following 3 categories: food, liquer, electronics:".format(items[i]))
-
+                               
+            #this codes remove the capitalized input problem:
             if user_input != "Food" and user_input != "food" and user_input !="Liquer" and user_input != "liquer" and user_input != "Electronics" and user_input != "electronics":
                 print("Please restart the program. You had entered an invalid category" "for {}. The tax shown below IS NOT ACCURATE. PLEASE RESTART".format(items[i]))
                 break
@@ -121,6 +134,7 @@ def total(items,prices):
 
     return tax
 
+#testing:
 test1= total(["bread","bear","ipad", "apple"],[300,800,30000,5000])
 print(test1)
 
