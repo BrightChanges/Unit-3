@@ -2,12 +2,10 @@
 ### Created by Kien Le Trung
 
 
-
-Link to appendix A:...
-
 ## Criteria A: Planning
 ### Context of the product
 My client is Owen, a student in my school. In conversation with Owen (see appendix A), he says that he has trouble with managing time for the huge amount of homeworks and tests he has at school. He says he would love me to create a software that could help him manage time better. 
+Link to appendix A:...
 
 #### Sketches of Ideas
 
