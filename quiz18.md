@@ -37,6 +37,7 @@ class StringN():
 
         print(step)
 
+#testing:
 test1=StringN("39").do_function()
 
 ```
