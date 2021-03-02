@@ -1,16 +1,21 @@
 # TimeJoint | Mini-IA
 ### Created by Kien Le Trung
-My client is Owen, a student in my school. In conversation with Owen (see appendix A), he says that he has trouble with managing time for the huge amount of homeworks and tests he has at school. He says he would love me to create a software that could help him manage time better. 
+
 
 
 Link to appendix A:...
 
 ## Criteria A: Planning
 ### Context of the product
+My client is Owen, a student in my school. In conversation with Owen (see appendix A), he says that he has trouble with managing time for the huge amount of homeworks and tests he has at school. He says he would love me to create a software that could help him manage time better. 
 
 #### Sketches of Ideas
 
+![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_0037.jpg)
+Fig.1 Sketches of TimeJoint
 
+![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_0038.jpg)
+Fig.2 Other sketches of TimeJoint
 
 ## Criteria B: Design
 #### System Diagram
