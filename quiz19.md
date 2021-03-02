@@ -21,7 +21,6 @@ class ReverseMode():
     def do_function(self):
 
         for i in range(len(decode_list)):
-
             if self.input[0:3] == decode_list[i]:
                 output.append(i)
 
