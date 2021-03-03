@@ -50,7 +50,9 @@ from sqlalchemy.orm import relationship
 from kivy.uix.behaviors import ButtonBehavior
 from kivymd.app import MDApp
 from kivymd.uix.label import MDLabel
+from kivymd.uix.picker import MDDatePicker
 from kivymd.uix.screen import MDScreen
+from datetime import date
 
 
 Base = declarative_base()
@@ -84,8 +86,61 @@ session.configure(bind=engine)
 Base.metadata.create_all(engine)
 
 
+class TaskScreen(MDScreen):
+
+    value_hold=0
+
+    def add_task(self):
+        global value_hold
+        global today
+        print("Add task button (active one) clicked")
+        task_name = self.ids.task_name.text
+        type = self.ids.type.text
+        deadline = value_hold
+        print(task_name)
+        print(type)
+        print(deadline)
+
+
+        if type != "Test" and type != "test" and type!= "Homework" and type != "homework":
+            print("Invalid type for task!")
+        elif len(task_name)>256:
+            print("Task name is too long!")
+        elif str(deadline) < str(date.today()):
+            print("Task's deadline is invalid!")
+
+
+
+    def on_save(self, instance, value, date_range):
+        global value_hold
+        value_hold = value
+        # print(instance, value, date_range)
+        print(value) #THE VALUE OF THE DEADLINE IS STORED IN the variable value
+
+    def on_cancel(self, instance, value):
+        """Events called when the "CANCEL" dialog box button is clicked."""
+
+    def show_date_picker(self):
+
+        date_dialog = MDDatePicker()
+        date_dialog.bind(on_save=self.on_save, on_cancel=self.on_cancel)
+        date_dialog.open()
+        return self.on_save
+
+
+
+
+
 class HomeScreen(MDScreen):
-    pass
+
+    def try_prioritize(self):
+        print("Prioritize button clicked")
+
+    def proceed_to_add_task(self):
+        print("Add task button (non-active one) clicked")
+        self.parent.current = "TaskScreen"
+
+
 
 class RegisterScreen(MDScreen):
 
@@ -151,7 +206,6 @@ class MainApp(MDApp):
 
 
 MainApp().run()
-
 ```
 
 -main.kv:
@@ -170,9 +224,136 @@ ScreenManager:
     HomeScreen:
         name: "HomeScreen"
 
+    TaskScreen:
+        name: "TaskScreen"
+
+<TaskScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.height, root.width
+
+        FitImage:
+            source: "lake.jpg"
+
+    MDCard:
+        size_hint: 0.5, 0.75
+        elevation: 10
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        orientation: "vertical"
+
+#How to change the c0lor of background of a MDCard
+
+        MDBoxLayout:
+            id: content #id or name
+            adaptive_height: True
+            orientation: "vertical"
+            padding: dp(30)
+            spacing: dp(20)
+
+            MDLabel:
+                text: "TimeJoint"
+                font_style: "H4"
+                halign: "center"
+
+            MDLabel:
+
+
+            MDLabel:
+
+            MDLabel:
+                text: "Add task"
+                font_style: "H6"
+                halign: "center"
+
+            MDTextField:
+                id: task_name
+                hint_text: "Task/Homework/Test Name"
+
+                required: True
+
+
+
+            MDRaisedButton:
+                text: "Pick Deadline"
+                pos_hint: {'center_x': .5, 'center_y': .5}
+                on_release:
+                    root.show_date_picker()
+
+
+
+            MDTextField:
+                id: type
+                hint_text: "Type (Test or Homework?)"
+
+
+                required: True
+
+            MDRaisedButton:
+                text: "+ Add task"
+                on_release:
+                    root.add_task()
+
+
+
 
 <HomeScreen>:
 #this is for the visual
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.height, root.width
+
+        FitImage:
+            source: "lake.jpg"
+
+    MDCard:
+        size_hint: 0.5, 0.75
+        elevation: 10
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        orientation: "vertical"
+
+#How to change the c0lor of background of a MDCard
+
+        MDBoxLayout:
+            id: content #id or name
+            adaptive_height: True
+            orientation: "vertical"
+            padding: dp(30)
+            spacing: dp(20)
+
+            MDLabel:
+                text: "TimeJoint"
+                font_style: "H4"
+                halign: "center"
+
+            MDLabel:
+
+            MDRaisedButton:
+                text: "View your tasks in prioritize order"
+                on_release:
+                    root.try_prioritize()
+
+            MDRaisedButton:
+                text: "Add task"
+                on_release:
+                    root.proceed_to_add_task()
+
+            MDLabel:
+
+            MDLabel:
+
+            MDLabel:
+
+            MDLabel:
+
+            MDLabel:
+
+            MDLabel:
+
+
+
+
+
+
 
 
 #the RegisterScreen
@@ -182,7 +363,7 @@ ScreenManager:
         size: root.height, root.width
 
         FitImage:
-            source: "time.png"
+            source: "lake.jpg"
 
     MDCard:
         size_hint: 0.5, 0.75
@@ -254,13 +435,17 @@ ScreenManager:
         size: root.height, root.width
 
         FitImage:
-            source: "time.png"
+            source: "lake.jpg"
 
     MDCard:
         size_hint: 0.5, 0.75
         elevation: 10
         pos_hint: {"center_x": 0.5, "center_y": 0.5}
         orientation: "vertical"
+
+        #Image:
+            #source: "timejointicon.jpg"
+            #size: self.width + 20, self.height + 20
 
 #How to change the c0lor of background of a MDCard
 
@@ -272,8 +457,17 @@ ScreenManager:
             spacing: dp(20)
 
             MDLabel:
-                text: "LOGIN"
+                text: "TimeJoint"
                 font_style: "H3"
+                halign: "center"
+
+            MDLabel:
+
+            MDLabel:
+
+            MDLabel:
+                text: "LOGIN"
+                font_style: "H4"
                 halign: "center"
 
             MDTextField:
