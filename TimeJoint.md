@@ -21,10 +21,13 @@ Fig.2 Other sketches of TimeJoint
 ![](https://github.com/BrightChanges/Unit-3/blob/main/TimeJoint_systemdiagram%20(1).png)
 
 
-#### Flow Diagram of the priority-algorithm
+#### Flow Diagram of the priority-algorithm (DO THIS DIGITALLY AFTER THE WHOLE PROGRAM WORKED)
 
 ![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_0044.jpg)
 
+#### ER Diagram (DO THIS DIGITALLY AFTER THE WHOLE PROGRAM WORKED)
+
+![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_4833.jpg)
 
 ## Criteria C: Development
 1st development story:
