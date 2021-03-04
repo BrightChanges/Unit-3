@@ -38,16 +38,16 @@ Fig.2 Other sketches of TimeJoint
 -main.py:
 
 ```.py
-
 ##WORKING IN PROGRESS!!!
-
-
+from kivy.lang import Builder
 from sqlalchemy import Column, DateTime, String, Integer, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
 
 from kivy.uix.behaviors import ButtonBehavior
+from sqlalchemy.sql.functions import current_user
+
 from kivymd.app import MDApp
 from kivymd.uix.label import MDLabel
 from kivymd.uix.picker import MDDatePicker
@@ -57,21 +57,24 @@ from datetime import date
 
 Base = declarative_base()
 
+
+
+
 class User(Base):
     __tablename__ = 'user'
-    id = Column(Integer, primary_key=True, autoincrement=True)
+    id = Column(Integer, primary_key=True, unique=True)
     email = Column(String(256),  unique=True)
     username = Column(String(256))
     password = Column(String)
 
     #relationship "has in the ER diagram" one-to-many
-    tasks = relationship("Tasks", backref="user")
+    tasks = relationship("Tasks", backref="creator")
 
 class Tasks(Base):
     __tablename__ = "tasks"
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String)
-    deadline = Column(DateTime)
+    deadline = Column(String)
     type = Column(String)
     user_id = Column(Integer, ForeignKey('user.id'))
 
@@ -87,13 +90,17 @@ Base.metadata.create_all(engine)
 
 
 class TaskScreen(MDScreen):
+    def __init__(self, **kw):
+        super().__init__(**kw)
+        self.date = ""
 
     value_hold=0
 
     def add_task(self):
-        global value_hold
         global today
-        print("Add task button (active one) clicked")
+
+        user_id = LoginScreen.current_user
+        value_hold = self.date
         task_name = self.ids.task_name.text
         type = self.ids.type.text
         deadline = value_hold
@@ -101,21 +108,30 @@ class TaskScreen(MDScreen):
         print(type)
         print(deadline)
 
-
+#validate if the input is valid, preventing error
         if type != "Test" and type != "test" and type!= "Homework" and type != "homework":
             print("Invalid type for task!")
         elif len(task_name)>256:
             print("Task name is too long!")
         elif str(deadline) < str(date.today()):
             print("Task's deadline is invalid!")
+        else:
+            s = session()
+            task = Tasks(name=task_name, deadline=deadline,type=type, user_id=user_id)
+            s.add(task)
+            print("task with name {} , deadline {}, type {} was added to database".format(task_name,deadline,type))
+            s.commit()
+            s.close()
+
+
+
+
 
 
 
     def on_save(self, instance, value, date_range):
-        global value_hold
-        value_hold = value
-        # print(instance, value, date_range)
-        print(value) #THE VALUE OF THE DEADLINE IS STORED IN the variable value
+        self.date = value
+
 
     def on_cancel(self, instance, value):
         """Events called when the "CANCEL" dialog box button is clicked."""
@@ -144,7 +160,9 @@ class HomeScreen(MDScreen):
 
 class RegisterScreen(MDScreen):
 
+
     def try_register(self):
+
         print("Register was attempted")
         username = self.ids.username_input.text
         email = self.ids.email_input.text
@@ -158,6 +176,7 @@ class RegisterScreen(MDScreen):
             email = self.ids.email_input.text
             password = self.ids.password_input.text
             print(username,email, password)
+
             email_check = s.query(User).filter_by(email=email).first() ##similar to fetchone()
 
             if email_check:
@@ -171,6 +190,11 @@ class RegisterScreen(MDScreen):
                 s.commit()
                 s.close()
 
+
+
+
+                self.parent.current = "LoginScreen"
+
         else:
             print("The passwords do not match")
 
@@ -179,6 +203,7 @@ class ButtonLabel(ButtonBehavior, MDLabel):
     pass
 
 class LoginScreen(MDScreen):
+    current_user = None
 
     def try_login(self):
         email = self.ids.email_input.text
@@ -192,6 +217,7 @@ class LoginScreen(MDScreen):
         if user_check:
             s.close()
             print(f"login successful for user with email '{email}")
+            LoginScreen.current_user = user_check.id #getting the ide of the current user
             self.parent.current = "HomeScreen"
 
         else:
@@ -206,6 +232,7 @@ class MainApp(MDApp):
 
 
 MainApp().run()
+
 ```
 
 -main.kv:
