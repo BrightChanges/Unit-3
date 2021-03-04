@@ -38,6 +38,7 @@ Fig.2 Other sketches of TimeJoint
 -main.py:
 
 ```.py
+
 ##WORKING IN PROGRESS!!!
 from kivy.lang import Builder
 from sqlalchemy import Column, DateTime, String, Integer, ForeignKey
@@ -53,6 +54,7 @@ from kivymd.uix.label import MDLabel
 from kivymd.uix.picker import MDDatePicker
 from kivymd.uix.screen import MDScreen
 from datetime import date
+from kivymd.uix.list import OneLineListItem
 
 
 Base = declarative_base()
@@ -89,12 +91,29 @@ session.configure(bind=engine)
 Base.metadata.create_all(engine)
 
 
+# class MyTaskScreen(MDScreen):
+
+
 class TaskScreen(MDScreen):
     def __init__(self, **kw):
         super().__init__(**kw)
         self.date = ""
+        self.id = LoginScreen.current_user
 
     value_hold=0
+
+    def show_task(self):
+        #LoginScreen.current_user is the id of the current user.
+        post_list = ""
+        s = session()
+        post_check = s.query(Tasks).filter_by(user_id=LoginScreen.current_user).all()
+
+        for i in range(len(post_check)):
+            # print(post_check[i].name, "|" ,post_check[i].deadline,  "|" , post_check[i].type)
+            post_list +=  ","+ str(post_check[i].name) + "|" +str(post_check[i].deadline)+ "|"+str(post_check[i].type)
+        print(post_list)
+
+
 
     def add_task(self):
         global today
@@ -232,13 +251,11 @@ class MainApp(MDApp):
 
 
 MainApp().run()
-
 ```
 
 -main.kv:
 
 ```.py
-
 ScreenManager:
     id: scr_manager
 
@@ -251,8 +268,11 @@ ScreenManager:
     HomeScreen:
         name: "HomeScreen"
 
-    TaskScreen:
-        name: "TaskScreen"
+
+
+
+
+
 
 <TaskScreen>:
     BoxLayout:
@@ -261,6 +281,8 @@ ScreenManager:
 
         FitImage:
             source: "lake.jpg"
+
+
 
     MDCard:
         size_hint: 0.5, 0.75
@@ -277,15 +299,24 @@ ScreenManager:
             padding: dp(30)
             spacing: dp(20)
 
+
+
             MDLabel:
                 text: "TimeJoint"
                 font_style: "H4"
                 halign: "center"
 
-            MDLabel:
+            MDRaisedButton:
+                text: "Check my task"
+                pos_hint: {'center_x': .5, 'center_y': .5}
+                on_release:
+                    root.show_task()
 
 
-            MDLabel:
+            ScrollView:
+
+                MDList:
+                    id: task_list
 
             MDLabel:
                 text: "Add task"
@@ -528,6 +559,8 @@ ScreenManager:
                     on_press:
                         print("here")
                         root.parent.current = "RegisterScreen"
+
+
 
 ```
 
