@@ -18,7 +18,7 @@ Fig.2 Other sketches of Coin Snack
 ## Criteria B: Design
 #### System Diagram
 
-![]()
+![](https://github.com/BrightChanges/Unit-3/blob/main/CoinSnack%20System%20Diagram.png)
 
 #### ER Diagram (DO THIS DIGITALLY AFTER THE WHOLE PROGRAM WORKED)
 
