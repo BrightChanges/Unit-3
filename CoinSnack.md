@@ -1,34 +1,28 @@
-# TimeJoint | Mini-IA
+# CoinSnack | Mini-IA
 ### Created by Kien Le Trung
 
 
 ## Criteria A: Planning
 ### Context of the product
-My client is Owen, a student in my school. In conversation with Owen (see appendix A), he says that he has trouble with managing time for the huge amount of homeworks and tests he has at school. He says he would love me to create a software that could help him manage time better. 
+My client is Owen, a student in my school. In conversation with Owen (see appendix A), he says that sometimes, he doesn't want to go to the cafeteria to buy snacks and he would love if he could sit in his room and still be able to buy snacks. He says he would love me to create an app that lets him order snacks and get them deliver straight to his room.
 Link to appendix A:...
 
 #### Sketches of Ideas
 
-![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_0037.jpg)
-Fig.1 Sketches of TimeJoint
+![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_4837.JPG)
+Fig.1 Sketches of Coin Snack
 
-![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_0038.jpg)
-Fig.2 Other sketches of TimeJoint
+![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_4838.jpg)
+Fig.2 Other sketches of Coin Snack
 
 ## Criteria B: Design
 #### System Diagram
 
-![](https://github.com/BrightChanges/Unit-3/blob/main/TimeJoint_systemdiagram%20(1).png)
-
-
-#### Flow Diagram of the priority-algorithm (DO THIS DIGITALLY AFTER THE WHOLE PROGRAM WORKED)
-
-![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_0044.jpg)
+![]()
 
 #### ER Diagram (DO THIS DIGITALLY AFTER THE WHOLE PROGRAM WORKED)
 
-![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_4833.jpg)
-
+![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_4839.jpg)
 ## Criteria C: Development
 1st development story:
 
@@ -578,13 +572,13 @@ Link to the desmontration video:...
 Link to the desmontration video:...
 
 ...
-Fig. Picture 1 of TimeJoint 
+Fig. Picture 1 of CoinSnack
 
 ...
-Fig. Picture 2 of TimeJoint 
+Fig. Picture 2 of CoinSnack
 
 ...
-Fig. Picture 3 of TimeJoint 
+Fig. Picture 3 of CoinSnack 
 
 
 
