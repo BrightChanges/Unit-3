@@ -76,7 +76,7 @@ class Snack(Base):
     __tablename__ = "snack"
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String)
-    amount = Column(String)
+    amount = Column(Integer)
     price = Column(Integer) #price in CoinSnack is in ¥
     delivery_location = Column(String)
     user_id = Column(Integer, ForeignKey('user.id'))
@@ -118,21 +118,43 @@ class SnackScreen(MDScreen):
         # print(LoginScreen.current_user) #LoginScreen.current_user is the id of the user
         user_id = LoginScreen.current_user
         snack_name = self.ids.snack_name.text
-        amount = int(self.ids.snack_amount.text)
+        amount = self.ids.snack_amount.text
 
-        if snack_name not in "Hamburger,hamburger,Coke,coke,Popcorn,popcorn":
+        if snack_name != "Hamburger" and snack_name != "hamburger" and snack_name != "Coke" and snack_name != "coke" and snack_name!= "Popcorn"\
+                and snack_name!="popcorn":
+
             print("Invalid food order")
+
+        elif amount.isnumeric() == False:
+            print("Invalid amount")
+
         else:
-            if (snack_name == "Hamburger" or snack_name ==  "hamburger"):
-                price_per_product = 300
+
+            if int(amount) > 50 or int(amount) < 1:
+                print("The ordering amount is too much or too little.")
+            else:
+                if (snack_name == "Hamburger" or snack_name ==  "hamburger"):
+                    price_per_product = 300
 
 
-            elif (snack_name == "Coke" or snack_name == "coke" or snack_name =="Popcorn" or snack_name == "popcorn"):
-                price_per_product = 100
+                elif (snack_name == "Coke" or snack_name == "coke" or snack_name =="Popcorn" or snack_name == "popcorn"):
+                    price_per_product = 100
 
-            price = int(amount * price_per_product)
-            print(user_id, snack_name, amount, price)
-            
+                price = int(int(amount) * price_per_product)
+                print(user_id, snack_name, int(amount), price)
+
+                amount = int(amount)
+                price = int(price)
+
+                s = session()
+                order = Snack(name=snack_name, amount=amount, price=price, user_id=user_id)
+                s.add(order)
+                s.commit()
+                s.close()
+
+                print("order from user with user id {}: snack_name: {} , amount: {}, price {} was added to database Snack".format(user_id, snack_name, amount, price))
+
+
 
 
 class HomeScreen(MDScreen):
@@ -214,6 +236,7 @@ class MainApp(MDApp):
 
 
 MainApp().run()
+
 
 
 ```
