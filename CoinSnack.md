@@ -94,6 +94,21 @@ session.configure(bind=engine)
 Base.metadata.create_all(engine)
 
 
+
+class ThankyouScreen(MDScreen):
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.delivery_location = LoginScreen.delivery_location
+
+    def on_pre_enter(self, *args):
+        self.thankyou()
+
+    def thankyou(self):
+        LoginScreen.delivery_location.strip()
+        self.ids.location_thankyou.text = f"Your order will arrived to your delivery location ( {LoginScreen.delivery_location}) in under 30 minutes."
+
+
 class CheckoutScreen(MDScreen):
 
     def __init__(self, **kwargs):
@@ -104,22 +119,30 @@ class CheckoutScreen(MDScreen):
     def on_pre_enter(self, *args):
         self.checkout()
 
+
     def checkout(self):
         order_list = ""
+        price = 0
         s = session()
         order_check = s.query(Snack).filter_by(user_id=LoginScreen.current_user).all()
 
         print(f"Delivery location is at {LoginScreen.delivery_location}")
         print(f"Total order of user with id {LoginScreen.delivery_location}:")
         for i in range(len(order_check)):
-            order_list += "AND" +str(order_check[i].name) + "|" + str(order_check[i].amount) + "|" + str(
-                order_check[i].price)
+            order_list += '\n' + "| No."+ str(i+1) + " | " + "Name: " + str(order_check[i].name).capitalize() + "| Amount: " + str(order_check[i].amount) + " | Price: " + str(order_check[i].price)+"¥ |"
+            price += order_check[i].price
         print(order_list)
 
 
         self.ids.my_orders.text = order_list
 
+        self.ids.delivery_location.text = f"Delivery location: {LoginScreen.delivery_location}"
 
+        self.ids.total_price.text = f"Total cost: {price}¥"
+
+    def confirm_order(self):
+        print("Confirm button was clicked")
+        self.parent.current = "ThankyouScreen"
 
 
 class SnackScreen(MDScreen):
@@ -253,6 +276,9 @@ class RegisterScreen(MDScreen):
         else:
             print("The passwords do not match")
 
+    def switch_to_login(self):
+        self.parent.current = "LoginScreen"
+
 
 class ButtonLabel(ButtonBehavior, MDLabel):
     pass
@@ -314,8 +340,89 @@ ScreenManager:
 
     SnackScreen:
         name: "SnackScreen"
+
     CheckoutScreen:
         name: "CheckoutScreen"
+
+    ThankyouScreen:
+        name: "ThankyouScreen"
+
+<ThankyouScreen>
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.height, root.width
+
+        FitImage:
+            source: "snackpy.jpeg"
+
+
+    MDCard:
+        size_hint: 0.5, 0.95
+        elevation: 10
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        orientation: "vertical"
+
+#How to change the color of background of a MDCard
+
+        MDBoxLayout:
+            id: content #id or name
+            adaptive_height: True
+            orientation: "vertical"
+            padding: dp(30)
+            spacing: dp(20)
+
+
+            MDLabel:
+                text: "CoinSnack"
+                font_style: "H3"
+                halign: "center"
+            MDLabel:
+
+            MDLabel:
+
+            MDLabel:
+
+            MDLabel:
+
+            MDLabel:
+                text: "Thank you for your order!"
+                font_style: "H4"
+                halign: "center"
+
+            MDLabel:
+
+            MDLabel:
+
+            MDLabel:
+
+            MDLabel:
+                id : location_thankyou
+                font_style: "H6"
+                halign: "center"
+
+            MDLabel:
+
+            MDLabel:
+
+            MDLabel:
+
+            MDLabel:
+                text: "Thank you for using CoinSnack. We hope you will have a great time with your snacks. "
+                font_style: "Subtitle2"
+                halign: "center"
+
+            MDLabel:
+
+            MDLabel:
+
+            MDLabel:
+
+            MDLabel:
+
+            MDLabel:
+
+            MDLabel:
+
 
 <CheckoutScreen>
     BoxLayout:
@@ -356,31 +463,65 @@ ScreenManager:
                 font_style: "H4"
                 halign: "center"
 
-            MDLabel:
-                id: my_orders
-                font_style: "Subtitle2"
+
 
 
             MDLabel:
 
             MDLabel:
-                text: "Receipts: ..."
+                text: "Receipts:"
                 font_style: "H5"
                 halign: "center"
 
             MDLabel:
 
             MDLabel:
+                id: my_orders
+                font_style: "Subtitle2"
+                halign: "center"
+
+            MDLabel:
+
+            MDLabel:
+
+            MDLabel:
+
+            MDLabel:
+                id: total_price
+                font_style: "Subtitle1"
+                halign: "center"
+
+
+            MDLabel:
+
+
+
+            MDLabel:
                 text: "Payment: Cash upon delivery"
-                font_style: "H6"
+                font_style: "Subtitle1"
+                halign: "center"
+
+
+            MDLabel:
+                id: delivery_location
+                font_style: "Subtitle1"
                 halign: "center"
 
             MDLabel:
 
             MDLabel:
-                text: "Delivery place: ..."
-                font_style: "H6"
+
+            MDLabel:
+
+
+
+            MDRaisedButton:
+                text: "Confirm order"
                 halign: "center"
+                on_release:
+                    root.confirm_order()
+
+
 
 <MagicButton@MagicBehavior+MDIconButton>
 
@@ -638,7 +779,7 @@ ScreenManager:
             source: "snackpy.jpeg"
 
     MDCard:
-        size_hint: 0.5, 0.9
+        size_hint: 0.5, 0.95
         elevation: 10
         pos_hint: {"center_x": 0.5, "center_y": 0.5}
         orientation: "vertical"
@@ -707,6 +848,11 @@ ScreenManager:
                 text: "Register"
                 on_release:
                     root.try_register()
+
+            MDRaisedButton:
+                text: "Log in"
+                on_release:
+                    root.switch_to_login()
 
 
 
@@ -782,7 +928,6 @@ ScreenManager:
                     on_press:
                         print("here")
                         root.parent.current = "RegisterScreen"
-
 
 
 
