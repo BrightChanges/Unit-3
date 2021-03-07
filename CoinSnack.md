@@ -551,6 +551,31 @@ ScreenManager:
 
             MDLabel:
 
+    ###Trying to create a swiper:
+            #MDSwiper:
+                #size_hint_y: None
+                #height: root.height
+                #y: root.height - self.height
+                #on_swipe: self.get_current_item().ids.icon.shake()
+
+                #MySwiper:
+
+                #MySwiper1:
+    ###
+
+    ###Trying to create a dropdown:
+            #MDDropDownItem:
+                #id: dropdown_item
+                #text: 'Hamburger'
+                #pos_hint: {'center_x': .5, 'center_y': .6}
+                #current_item: 'Hamburger'
+                #on_release: root.menu.open()
+
+            #MDRaisedButton:
+                #pos_hint: {'center_x': .5, 'center_y': .3}
+                #text: 'Check Item'
+                #on_release: toast(dropdown_item.current_item)
+    ###
             MDLabel:
                 font_style: "Body1"
                 text: "We are selling Hamburger, Coke, and Popcorn. Their price is as follow Hamburger: ¥300, Coke: ¥100, Popcorn: ¥100. To order, please type in their name down below:"
@@ -600,7 +625,7 @@ ScreenManager:
 
 
 <HomeScreen>:
-
+#this is for the visual
     BoxLayout:
         orientation: 'vertical'
         size: root.height, root.width
@@ -614,7 +639,7 @@ ScreenManager:
         pos_hint: {"center_x": 0.5, "center_y": 0.5}
         orientation: "vertical"
 
-
+#How to change the c0lor of background of a MDCard
 
         MDBoxLayout:
             id: content #id or name
@@ -669,11 +694,12 @@ ScreenManager:
             source: "snackpy.jpeg"
 
     MDCard:
-        size_hint: 0.5, 0.75
+        size_hint: 0.5, 0.9
         elevation: 10
         pos_hint: {"center_x": 0.5, "center_y": 0.5}
         orientation: "vertical"
 
+#How to change the c0lor of background of a MDCard
 
         MDBoxLayout:
             id: content #id or name
@@ -704,6 +730,14 @@ ScreenManager:
                 hint_text: "Email"
                 icon_left: "email"
                 helper_text: "Invalid email"
+                helper_text_mode: "on_error"
+                required: True
+
+            MDTextField:
+                id: delivery_location
+                hint_text: "Delivery location"
+                icon_left: "location"
+                helper_text: "Invalid location"
                 helper_text_mode: "on_error"
                 required: True
 
@@ -750,6 +784,7 @@ ScreenManager:
 
 
 
+#How to change the c0lor of background of a MDCard
 
         MDBoxLayout:
             id: content #id or name
@@ -803,6 +838,10 @@ ScreenManager:
                     on_press:
                         print("here")
                         root.parent.current = "RegisterScreen"
+
+
+
+
 
 
 ```
