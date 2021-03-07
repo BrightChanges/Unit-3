@@ -50,7 +50,7 @@ from kivymd.uix.label import MDLabel
 from kivymd.uix.picker import MDDatePicker
 from kivymd.uix.screen import MDScreen
 from kivymd.uix.menu import MDDropdownMenu
-
+from kivy.uix.label import Label
 from datetime import date
 from kivymd.uix.list import OneLineListItem
 
@@ -115,6 +115,9 @@ class CheckoutScreen(MDScreen):
             order_list += "AND" +str(order_check[i].name) + "|" + str(order_check[i].amount) + "|" + str(
                 order_check[i].price)
         print(order_list)
+
+
+        self.ids.my_orders.text = order_list
 
 
 
@@ -203,68 +206,6 @@ class SnackScreen(MDScreen):
     #     instance_menu.dismiss()
     #
 
-
-
-######################################################################
-
-    # def show_task(self):
-    #     # LoginScreen.current_user is the id of the current user.
-    #     post_list = ""
-    #     s = session()
-    #     post_check = s.query(Snack).filter_by(user_id=LoginScreen.current_user).all()
-    #
-    #     for i in range(len(post_check)):
-    #         # print(post_check[i].name, "|" ,post_check[i].deadline,  "|" , post_check[i].type)
-    #         post_list += "," + str(post_check[i].name) + "|" + str(post_check[i].deadline) + "|" + str(
-    #             post_check[i].type)
-    #     print(post_list)
-    #
-    # def add_task(self):
-    #     global today
-    #
-    #     user_id = LoginScreen.current_user
-    #     value_hold = self.date
-    #     task_name = self.ids.task_name.text
-    #     type = self.ids.type.text
-    #     deadline = value_hold
-    #     print(task_name)
-    #     print(type)
-    #     print(deadline)
-    #
-    #     # validate if the input is valid, preventing error
-    #     if type != "Test" and type != "test" and type != "Homework" and type != "homework":
-    #         print("Invalid type for task!")
-    #     elif len(task_name) > 256:
-    #         print("Task name is too long!")
-    #     elif str(deadline) < str(date.today()):
-    #         print("Task's deadline is invalid!")
-    #     else:
-    #         s = session()
-    #         task = Snack(name=task_name, deadline=deadline, type=type, user_id=user_id)
-    #         s.add(task)
-    #         print("task with name {} , deadline {}, type {} was added to database".format(task_name, deadline, type))
-    #         s.commit()
-    #         s.close()
-
-    # # def get_date(self, date):
-    # #     self.root.ids.date_picked.text=str(date)
-    # #     self.date=date
-    # #
-    # # def show_date_picker(self):
-    # #     date_dialog = MDDatePicker(callback=self.get_date)
-    # #     date_dialog.open()
-    #
-    # def on_save(self, instance, value, date_range):
-    #     self.date = value
-    #
-    # def on_cancel(self, instance, value):
-    #     """Events called when the "CANCEL" dialog box button is clicked."""
-    #
-    # def show_date_picker(self):
-    #     date_dialog = MDDatePicker()
-    #     date_dialog.bind(on_save=self.on_save, on_cancel=self.on_cancel)
-    #     date_dialog.open()
-    #     return self.on_save
 
 
 class HomeScreen(MDScreen):
@@ -416,6 +357,9 @@ ScreenManager:
                 halign: "center"
 
             MDLabel:
+                id: my_orders
+                font_style: "Subtitle2"
+
 
             MDLabel:
 
