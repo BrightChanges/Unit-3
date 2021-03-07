@@ -66,6 +66,7 @@ class User(Base):
     id = Column(Integer, primary_key=True, unique=True)
     email = Column(String(256), unique=True)
     password = Column(String)
+    delivery_location = Column(String)
 
     # relationship "has in the ER diagram" one-to-many
     snacks = relationship("Snack", backref="user")
@@ -78,7 +79,6 @@ class Snack(Base):
     name = Column(String)
     amount = Column(Integer)
     price = Column(Integer) #price in CoinSnack is in ¥
-    delivery_location = Column(String)
     user_id = Column(Integer, ForeignKey('user.id'))
 
 
@@ -95,7 +95,27 @@ Base.metadata.create_all(engine)
 
 
 class CheckoutScreen(MDScreen):
-    pass
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.id = LoginScreen.current_user
+        self.delivery_location = LoginScreen.delivery_location
+
+    def on_pre_enter(self, *args):
+        self.checkout()
+
+    def checkout(self):
+        order_list = ""
+        s = session()
+        order_check = s.query(Snack).filter_by(user_id=LoginScreen.current_user).all()
+
+        print(f"Delivery location is at {LoginScreen.delivery_location}")
+        print(f"Total order of user with id {LoginScreen.delivery_location}:")
+        for i in range(len(order_check)):
+            order_list += "AND" +str(order_check[i].name) + "|" + str(order_check[i].amount) + "|" + str(
+                order_check[i].price)
+        print(order_list)
+
 
 
 
@@ -105,7 +125,6 @@ class SnackScreen(MDScreen):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.date = ""
         self.id = LoginScreen.current_user
 
     def check_out(self):
@@ -157,6 +176,97 @@ class SnackScreen(MDScreen):
 
 
 
+
+
+
+
+
+
+
+ #######The code below is for the dropdown, is not working so currently stop developing:
+    #     menu_items = [{"text": "Hamburger"}, {"text": "Noodle"} ]
+    #
+    #     self.menu = MDDropdownMenu(
+    #         #THIS CODE BELOW IS CAUSING ERROR!:
+    #         # caller = self.ids.dropdown_item,
+    #         ######################################
+    #         items = menu_items,
+    #         position = "center",
+    #         width_mult=4,
+    #     )
+    #     self.menu.bind(on_release=self.set_item)
+    #
+    # value_hold = 0
+    #
+    # def set_item(self, instance_menu, instance_menu_item):
+    #     self.ids.dropdown_item.set_item(instance_menu_item.text)
+    #     instance_menu.dismiss()
+    #
+
+
+
+######################################################################
+
+    # def show_task(self):
+    #     # LoginScreen.current_user is the id of the current user.
+    #     post_list = ""
+    #     s = session()
+    #     post_check = s.query(Snack).filter_by(user_id=LoginScreen.current_user).all()
+    #
+    #     for i in range(len(post_check)):
+    #         # print(post_check[i].name, "|" ,post_check[i].deadline,  "|" , post_check[i].type)
+    #         post_list += "," + str(post_check[i].name) + "|" + str(post_check[i].deadline) + "|" + str(
+    #             post_check[i].type)
+    #     print(post_list)
+    #
+    # def add_task(self):
+    #     global today
+    #
+    #     user_id = LoginScreen.current_user
+    #     value_hold = self.date
+    #     task_name = self.ids.task_name.text
+    #     type = self.ids.type.text
+    #     deadline = value_hold
+    #     print(task_name)
+    #     print(type)
+    #     print(deadline)
+    #
+    #     # validate if the input is valid, preventing error
+    #     if type != "Test" and type != "test" and type != "Homework" and type != "homework":
+    #         print("Invalid type for task!")
+    #     elif len(task_name) > 256:
+    #         print("Task name is too long!")
+    #     elif str(deadline) < str(date.today()):
+    #         print("Task's deadline is invalid!")
+    #     else:
+    #         s = session()
+    #         task = Snack(name=task_name, deadline=deadline, type=type, user_id=user_id)
+    #         s.add(task)
+    #         print("task with name {} , deadline {}, type {} was added to database".format(task_name, deadline, type))
+    #         s.commit()
+    #         s.close()
+
+    # # def get_date(self, date):
+    # #     self.root.ids.date_picked.text=str(date)
+    # #     self.date=date
+    # #
+    # # def show_date_picker(self):
+    # #     date_dialog = MDDatePicker(callback=self.get_date)
+    # #     date_dialog.open()
+    #
+    # def on_save(self, instance, value, date_range):
+    #     self.date = value
+    #
+    # def on_cancel(self, instance, value):
+    #     """Events called when the "CANCEL" dialog box button is clicked."""
+    #
+    # def show_date_picker(self):
+    #     date_dialog = MDDatePicker()
+    #     date_dialog.bind(on_save=self.on_save, on_cancel=self.on_cancel)
+    #     date_dialog.open()
+    #     return self.on_save
+
+
 class HomeScreen(MDScreen):
 
     def my_account(self):
@@ -173,9 +283,10 @@ class RegisterScreen(MDScreen):
 
         print("Register was attempted")
         email = self.ids.email_input.text
+        delivery_location = self.ids.delivery_location.text
         password_add = self.ids.password_input.text
         password_repeat = self.ids.password_check.text
-        print(email, password_add, password_repeat)
+        print(email, delivery_location, password_add, password_repeat)
 
         if password_add == password_repeat:
             s = session()
@@ -190,7 +301,7 @@ class RegisterScreen(MDScreen):
                 s.close()
 
             else:
-                user = User(email=email, password=password)
+                user = User(email=email, delivery_location=delivery_location, password=password)
                 s.add(user)
 
                 s.commit()
@@ -208,6 +319,7 @@ class ButtonLabel(ButtonBehavior, MDLabel):
 
 class LoginScreen(MDScreen):
     current_user = None
+    delivery_location = None
 
     def try_login(self):
         email = self.ids.email_input.text
@@ -222,6 +334,7 @@ class LoginScreen(MDScreen):
             s.close()
             print(f"login successful for user with email '{email}")
             LoginScreen.current_user = user_check.id  # getting the ide of the current user
+            LoginScreen.delivery_location = user_check.delivery_location  # getting the deliver location of the current user
             self.parent.current = "HomeScreen"
 
         else:
