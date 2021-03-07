@@ -49,6 +49,8 @@ from kivymd.app import MDApp
 from kivymd.uix.label import MDLabel
 from kivymd.uix.picker import MDDatePicker
 from kivymd.uix.screen import MDScreen
+from kivymd.uix.menu import MDDropdownMenu
+
 from datetime import date
 from kivymd.uix.list import OneLineListItem
 
@@ -69,10 +71,12 @@ class User(Base):
     snacks = relationship("Snack", backref="user")
 
 
+#Need to update the ER Diagram on Github!
 class Snack(Base):
     __tablename__ = "snack"
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String)
+    amount = Column(String)
     price = Column(Integer) #price in CoinSnack is in ¥
     delivery_location = Column(String)
     user_id = Column(Integer, ForeignKey('user.id'))
@@ -99,75 +103,36 @@ class SnackScreen(MDScreen):
 
     # string123 = StringProperty("")
 
-    def __init__(self, **kw):
-        super().__init__(**kw)
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.date = ""
         self.id = LoginScreen.current_user
-
-    value_hold = 0
 
     def check_out(self):
         print("Checkout button was pressed")
         self.parent.current = "CheckoutScreen"
 
-    # def show_task(self):
-    #     # LoginScreen.current_user is the id of the current user.
-    #     post_list = ""
-    #     s = session()
-    #     post_check = s.query(Snack).filter_by(user_id=LoginScreen.current_user).all()
-    #
-    #     for i in range(len(post_check)):
-    #         # print(post_check[i].name, "|" ,post_check[i].deadline,  "|" , post_check[i].type)
-    #         post_list += "," + str(post_check[i].name) + "|" + str(post_check[i].deadline) + "|" + str(
-    #             post_check[i].type)
-    #     print(post_list)
-    #
-    # def add_task(self):
-    #     global today
-    #
-    #     user_id = LoginScreen.current_user
-    #     value_hold = self.date
-    #     task_name = self.ids.task_name.text
-    #     type = self.ids.type.text
-    #     deadline = value_hold
-    #     print(task_name)
-    #     print(type)
-    #     print(deadline)
-    #
-    #     # validate if the input is valid, preventing error
-    #     if type != "Test" and type != "test" and type != "Homework" and type != "homework":
-    #         print("Invalid type for task!")
-    #     elif len(task_name) > 256:
-    #         print("Task name is too long!")
-    #     elif str(deadline) < str(date.today()):
-    #         print("Task's deadline is invalid!")
-    #     else:
-    #         s = session()
-    #         task = Snack(name=task_name, deadline=deadline, type=type, user_id=user_id)
-    #         s.add(task)
-    #         print("task with name {} , deadline {}, type {} was added to database".format(task_name, deadline, type))
-    #         s.commit()
-    #         s.close()
+    def add_to_cart(self):
+        price_per_product = 0
+        print("Add to cart button was pressed")
+        # print(LoginScreen.current_user) #LoginScreen.current_user is the id of the user
+        user_id = LoginScreen.current_user
+        snack_name = self.ids.snack_name.text
+        amount = int(self.ids.snack_amount.text)
 
-    # # def get_date(self, date):
-    # #     self.root.ids.date_picked.text=str(date)
-    # #     self.date=date
-    # #
-    # # def show_date_picker(self):
-    # #     date_dialog = MDDatePicker(callback=self.get_date)
-    # #     date_dialog.open()
-    #
-    # def on_save(self, instance, value, date_range):
-    #     self.date = value
-    #
-    # def on_cancel(self, instance, value):
-    #     """Events called when the "CANCEL" dialog box button is clicked."""
-    #
-    # def show_date_picker(self):
-    #     date_dialog = MDDatePicker()
-    #     date_dialog.bind(on_save=self.on_save, on_cancel=self.on_cancel)
-    #     date_dialog.open()
-    #     return self.on_save
+        if snack_name not in "Hamburger,hamburger,Coke,coke,Popcorn,popcorn":
+            print("Invalid food order")
+        else:
+            if (snack_name == "Hamburger" or snack_name ==  "hamburger"):
+                price_per_product = 300
+
+
+            elif (snack_name == "Coke" or snack_name == "coke" or snack_name =="Popcorn" or snack_name == "popcorn"):
+                price_per_product = 100
+
+            price = int(amount * price_per_product)
+            print(user_id, snack_name, amount, price)
+            
 
 
 class HomeScreen(MDScreen):
@@ -225,7 +190,7 @@ class LoginScreen(MDScreen):
     def try_login(self):
         email = self.ids.email_input.text
         password = self.ids.password_input.text
-
+        print(email,password)
         s = session()
         # THIS QUERY CODE BELOW only work if I add .first()=>ask Dr Ruben why so?
         user_check = s.query(User).filter_by(email=email, password=password).first()
@@ -250,11 +215,14 @@ class MainApp(MDApp):
 
 MainApp().run()
 
+
 ```
 
 -main.kv:
 
 ```.py
+#:import toast kivymd.toast.toast
+
 ScreenManager:
     id: scr_manager
 
@@ -334,9 +302,81 @@ ScreenManager:
                 font_style: "H6"
                 halign: "center"
 
+<MagicButton@MagicBehavior+MDIconButton>
+
+
+<MySwiper@MDSwiperItem>
+
+    RelativeLayout:
+
+        FitImage:
+            source: "hamburger.png"
+            radius: [20,]
+
+        MDBoxLayout:
+            adaptive_height: True
+            spacing: "12dp"
+
+            MagicButton:
+                id: icon
+                icon: "food"
+                user_font_size: "56sp"
+
+
+            MDLabel:
+                text: "Hamburger"
+                font_style: "H6"
+                size_hint_y: None
+                height: self.texture_size[1]
+                pos_hint: {"center_y": .5}
+
+            MDLabel:
+
+            MDLabel:
+                text: "Price: ¥300"
+                font_style: "Subtitle1"
+                size_hint_y: None
+                height: self.texture_size[1]
+                pos_hint: {"center_y": .5}
+
+<MySwiper1@MDSwiperItem>
+
+    RelativeLayout:
+
+        FitImage:
+            source: "noodle.png"
+            radius: [20,]
+
+        MDBoxLayout:
+            adaptive_height: True
+            spacing: "12dp"
+
+            MagicButton:
+                id: icon
+                icon: "food"
+                user_font_size: "56sp"
+
+
+            MDLabel:
+                text: "Noodle"
+                font_style: "H6"
+                size_hint_y: None
+                height: self.texture_size[1]
+                pos_hint: {"center_y": .5}
+
+            MDLabel:
+
+            MDLabel:
+                text: "Price: ¥200"
+                font_style: "Subtitle1"
+                size_hint_y: None
+                height: self.texture_size[1]
+                pos_hint: {"center_y": .5}
+
 
 
 <SnackScreen>:
+
     BoxLayout:
         orientation: 'vertical'
         size: root.height, root.width
@@ -344,14 +384,11 @@ ScreenManager:
         FitImage:
             source: "snackpy.jpeg"
 
-
     MDCard:
-        size_hint: 0.5, 0.95
+        size_hint: 0.5, 0.9
         elevation: 10
         pos_hint: {"center_x": 0.5, "center_y": 0.5}
         orientation: "vertical"
-
-#How to change the c0lor of background of a MDCard
 
         MDBoxLayout:
             id: content #id or name
@@ -366,53 +403,60 @@ ScreenManager:
                 font_style: "H4"
                 halign: "center"
 
-
-
-#TRYING TO OUTPUT THE STRING FROM MAIN.PY:
-            ScrollView:
-
-                MDList:
-                    id: task_list
             MDLabel:
-                id: root.string123
-                font_style: "H6"
-##########################################
+
+
             MDLabel:
-                text: "Choose your snack:"
+                text: "Order your snack:"
                 font_style: "H5"
                 halign: "center"
 
             MDLabel:
 
             MDLabel:
-                id: cola_160
-                text: "Cola 160ml"
-                font_style: "H6"
-                halign: "center"
 
             MDLabel:
-                id: cola_160
-                text: "Price: ¥100"
-                font_style: "H6"
+                font_style: "Body1"
+                text: "We are selling Hamburger, Coke, and Popcorn. Their price is as follow Hamburger: ¥300, Coke: ¥100, Popcorn: ¥100. To order, please type in their name down below:"
+
+            MDLabel:
+
+            MDLabel:
+
+            MDLabel:
+
+            MDLabel:
+                font_style: "Subtitle2"
+                text: "Please add each food each time to the cart. Once you added all the food you want to ordered to the cart, please click the check out button"
+
+            MDLabel:
+
+            MDTextField:
+                id:snack_name
+                hint_text: "Name of the snack"
+                icon_right: "food"
+                helper_text: "Invalid food"
+                helper_text_mode: "on_error"
+                required: True
+
+            MDTextField:
+                id:snack_amount
+                hint_text: "Amount of snack you want to order:"
+                icon_right: "account-question"
+                helper_text: "Invalid number"
+                helper_text_mode: "on_error"
+                required: True
+
+            MDRaisedButton:
+                text: "Add to cart"
                 halign: "center"
-
-
-
-            #MDRaisedButton:
-                #text: "Pick Deadline"
-                #pos_hint: {'center_x': .5, 'center_y': .5}
-                #on_release:
-                    #root.show_date_picker()
-
-            #MDLabel:
-                #id: date_picked
-                #size_hint: None, None
-                #size: dp(48)*3, dp(48)
-                #pos_hint: {'center_x': .5, 'center_y': .5}
+                on_release:
+                    root.add_to_cart()
 
 
             MDRaisedButton:
                 text: "Check out"
+                halign: "center"
                 on_release:
                     root.check_out()
 
@@ -420,7 +464,7 @@ ScreenManager:
 
 
 <HomeScreen>:
-#this is for the visual
+
     BoxLayout:
         orientation: 'vertical'
         size: root.height, root.width
@@ -434,7 +478,7 @@ ScreenManager:
         pos_hint: {"center_x": 0.5, "center_y": 0.5}
         orientation: "vertical"
 
-#How to change the c0lor of background of a MDCard
+
 
         MDBoxLayout:
             id: content #id or name
@@ -494,7 +538,6 @@ ScreenManager:
         pos_hint: {"center_x": 0.5, "center_y": 0.5}
         orientation: "vertical"
 
-#How to change the c0lor of background of a MDCard
 
         MDBoxLayout:
             id: content #id or name
@@ -571,7 +614,6 @@ ScreenManager:
 
 
 
-#How to change the c0lor of background of a MDCard
 
         MDBoxLayout:
             id: content #id or name
@@ -625,7 +667,6 @@ ScreenManager:
                     on_press:
                         print("here")
                         root.parent.current = "RegisterScreen"
-
 
 
 ```
