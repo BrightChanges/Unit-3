@@ -26,7 +26,7 @@ Fig.2 Other sketches of Coin Snack
 
 #### ER Diagram (DO THIS DIGITALLY AFTER THE WHOLE PROGRAM WORKED)
 
-![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_4839.jpg)
+![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_4857.jpg)
 ## Criteria C: Development
 1st development story:
 
