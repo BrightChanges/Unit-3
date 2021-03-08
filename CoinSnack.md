@@ -95,6 +95,13 @@ session.configure(bind=engine)
 Base.metadata.create_all(engine)
 
 
+class ImageScreen(MDScreen):
+
+    def go_back_to_order(self):
+        self.parent.current = "SnackScreen"
+
+
+
 class MyAccountScreen(MDScreen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -178,6 +185,9 @@ class SnackScreen(MDScreen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.id = LoginScreen.current_user
+
+    def see_snacks(self):
+        self.parent.current = "ImageScreen"
 
     def check_out(self):
         print("Checkout button was pressed")
@@ -268,6 +278,9 @@ class HomeScreen(MDScreen):
         print("Order snacks (non-active one) clicked")
         self.parent.current = "SnackScreen"
 
+    def log_out(self):
+        self.parent.current = "LoginScreen"
+
 
 class RegisterScreen(MDScreen):
 
@@ -351,6 +364,7 @@ MainApp().run()
 
 
 
+
 ```
 
 -main.kv:
@@ -381,6 +395,66 @@ ScreenManager:
 
     MyAccountScreen:
         name: "MyAccountScreen"
+
+    ImageScreen:
+        name: "ImageScreen"
+
+
+<MyTile@SmartTileWithLabel>
+    size_hint_y: None
+    height: "240dp"
+
+
+
+<ImageScreen>
+
+
+    MDBoxLayout:
+        id: logo_box
+        adaptive_height: True
+        orientation: "vertical"
+
+
+        Image:
+            source: "CoinSnack_Logo.png"
+
+
+    ScrollView:
+
+        MDGridLayout:
+            cols: 3
+            adaptive_height: True
+            padding: dp(4), dp(4)
+            spacing: dp(4)
+
+            MyTile:
+                source: "hamburger1.jpeg"
+                text: "[size=26]Hamburger [/size]\n[size=14]¥300[/size]"
+                tile_text_color: app.theme_cls.accent_color
+
+
+            MyTile:
+                source: "coke.jpg"
+                text: "[size=26]Coke [/size]\n[size=14]¥100[/size]"
+                tile_text_color: app.theme_cls.accent_color
+
+            MyTile:
+                source: "popcorn.jpg"
+                text: "[size=26]Popcorn  [/size]\n[size=14]¥100[/size]"
+                tile_text_color: app.theme_cls.accent_color
+
+
+    MDRectangleFlatIconButton:
+        icon: "backburger"
+        text: "Return to ordering"
+        halign: "center"
+        on_release:
+            root.go_back_to_order()
+
+
+
+
+
 
 
 <MyAccountScreen>
@@ -483,7 +557,6 @@ ScreenManager:
         pos_hint: {"center_x": 0.5, "center_y": 0.5}
         orientation: "vertical"
 
-#How to change the color of background of a MDCard
 
         MDBoxLayout:
             id: content #id or name
@@ -664,76 +737,8 @@ ScreenManager:
 
 
 
-<MagicButton@MagicBehavior+MDIconButton>
 
 
-<MySwiper@MDSwiperItem>
-
-    RelativeLayout:
-
-        FitImage:
-            source: "hamburger.png"
-            radius: [20,]
-
-        MDBoxLayout:
-            adaptive_height: True
-            spacing: "12dp"
-
-            MagicButton:
-                id: icon
-                icon: "food"
-                user_font_size: "56sp"
-
-
-            MDLabel:
-                text: "Hamburger"
-                font_style: "H6"
-                size_hint_y: None
-                height: self.texture_size[1]
-                pos_hint: {"center_y": .5}
-
-            MDLabel:
-
-            MDLabel:
-                text: "Price: ¥300"
-                font_style: "Subtitle1"
-                size_hint_y: None
-                height: self.texture_size[1]
-                pos_hint: {"center_y": .5}
-
-<MySwiper1@MDSwiperItem>
-
-    RelativeLayout:
-
-        FitImage:
-            source: "noodle.png"
-            radius: [20,]
-
-        MDBoxLayout:
-            adaptive_height: True
-            spacing: "12dp"
-
-            MagicButton:
-                id: icon
-                icon: "food"
-                user_font_size: "56sp"
-
-
-            MDLabel:
-                text: "Noodle"
-                font_style: "H6"
-                size_hint_y: None
-                height: self.texture_size[1]
-                pos_hint: {"center_y": .5}
-
-            MDLabel:
-
-            MDLabel:
-                text: "Price: ¥200"
-                font_style: "Subtitle1"
-                size_hint_y: None
-                height: self.texture_size[1]
-                pos_hint: {"center_y": .5}
 
 
 
@@ -769,18 +774,18 @@ ScreenManager:
                     source: "CoinSnack_Logo.png"
 
 
-
-
-
-
             MDLabel:
                 text: "Order your snack:"
                 font_style: "H6"
                 halign: "center"
 
-            MDLabel:
 
-            MDLabel:
+            MDRectangleFlatIconButton:
+                icon: "food"
+                text: "See image of the snacks"
+                pos_hint: {'x': .18}
+                on_release:
+                    root.see_snacks()
 
     ###Trying to create a swiper:
             #MDSwiper:
@@ -808,11 +813,13 @@ ScreenManager:
                 #on_release: toast(dropdown_item.current_item)
     ###
             MDLabel:
+
+            MDLabel:
                 font_style: "Body2"
-                text: "We are selling Hamburger, Coke, and Popcorn. Their price is as follow Hamburger: ¥300, Coke: ¥100, Popcorn: ¥100. To order, please type in their name down below:"
+                text: "We sell Hamburger, Coke, and Popcorn. Their price are: Hamburger: ¥300, Coke: ¥100, Popcorn: ¥100. To order, please type in their name down below:"
                 halign: "center"
 
-            MDLabel:
+
 
             MDLabel:
 
@@ -820,7 +827,7 @@ ScreenManager:
 
             MDLabel:
                 font_style: "Body2"
-                text: "Please add each food each time to the cart. Once you added all the food you want to ordered to the cart, please click the check out button."
+                text: "Please add each food each time to the cart. Once you added all the food you want to order to the cart, please click the check out button."
                 halign: "center"
 
             MDLabel:
@@ -924,6 +931,13 @@ ScreenManager:
                 text: "Order snacks"
                 on_release:
                     root.order_snack()
+
+            MDRectangleFlatIconButton:
+                icon: "logout"
+                pos_hint: {'x': .340}
+                text: "Log out"
+                on_release:
+                    root.log_out()
 
             MDLabel:
 
@@ -1125,10 +1139,6 @@ ScreenManager:
                     on_press:
                         print("here")
                         root.parent.current = "RegisterScreen"
-
-
-
-
 
 
 
