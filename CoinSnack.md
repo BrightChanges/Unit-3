@@ -354,11 +354,12 @@ class LoginScreen(MDScreen):
 class MainApp(MDApp):
 
     def build(self):
-        self.theme_cls.primary_palette = "Orange"
+        self.theme_cls.primary_palette = "Indigo"
 
 
 
 MainApp().run()
+
 
 
 
@@ -463,7 +464,7 @@ ScreenManager:
         size: root.height, root.width
 
         FitImage:
-            source: "snackpy.jpeg"
+            source: "coke_snack.jpeg"
 
 
     MDCard:
@@ -548,7 +549,7 @@ ScreenManager:
         size: root.height, root.width
 
         FitImage:
-            source: "snackpy.jpeg"
+            source: "coke_snack.jpeg"
 
 
     MDCard:
@@ -637,7 +638,7 @@ ScreenManager:
         size: root.height, root.width
 
         FitImage:
-            source: "snackpy.jpeg"
+            source: "coke_snack.jpeg"
 
 
     MDCard:
@@ -749,7 +750,7 @@ ScreenManager:
         size: root.height, root.width
 
         FitImage:
-            source: "snackpy.jpeg"
+            source: "coke_snack.jpeg"
 
     MDCard:
         size_hint: 0.5, 1
@@ -890,7 +891,7 @@ ScreenManager:
         size: root.height, root.width
 
         FitImage:
-            source: "snackpy.jpeg"
+            source: "coke_snack.jpeg"
 
     MDCard:
         size_hint: 0.5, 0.75
@@ -965,10 +966,10 @@ ScreenManager:
         size: root.height, root.width
 
         FitImage:
-            source: "snackpy.jpeg"
+            source: "coke_snack.jpeg"
 
     MDCard:
-        size_hint: 0.5, 0.95
+        size_hint: 0.5, 1
         elevation: 10
         pos_hint: {"center_x": 0.5, "center_y": 0.5}
         orientation: "vertical"
@@ -983,9 +984,6 @@ ScreenManager:
             padding: dp(30)
             spacing: dp(20)
 
-            MDLabel:
-
-            MDLabel:
 
             MDBoxLayout:
                 id: logo_box
@@ -996,9 +994,7 @@ ScreenManager:
                 Image:
                     source: "CoinSnack_Logo.png"
 
-            MDLabel:
 
-            MDLabel:
 
 
             MDLabel:
@@ -1064,7 +1060,7 @@ ScreenManager:
         size: root.height, root.width
 
         FitImage:
-            source: "snackpy.jpeg"
+            source: "coke_snack.jpeg"
 
     MDCard:
         size_hint: 0.5, 0.75
