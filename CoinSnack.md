@@ -68,6 +68,7 @@ class User(Base):
     password = Column(String)
     delivery_location = Column(String)
 
+
     # relationship "has in the ER diagram" one-to-many
     snacks = relationship("Snack", backref="user")
 
@@ -94,6 +95,24 @@ session.configure(bind=engine)
 Base.metadata.create_all(engine)
 
 
+class MyAccountScreen(MDScreen):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.delivery_location = LoginScreen.delivery_location
+        self.email = LoginScreen.email
+
+    def on_pre_enter(self, *args):
+        self.my_account()
+
+    def my_account(self):
+        self.ids.delivery_location.text = f"Your delivery location: {LoginScreen.delivery_location}"
+        self.ids.email.text = f"Your email: {LoginScreen.email}"
+
+    def home_page(self):
+        self.parent.current = "HomeScreen"
+
+
+
 
 class ThankyouScreen(MDScreen):
 
@@ -101,12 +120,17 @@ class ThankyouScreen(MDScreen):
         super().__init__(**kwargs)
         self.delivery_location = LoginScreen.delivery_location
 
+
     def on_pre_enter(self, *args):
         self.thankyou()
 
     def thankyou(self):
         LoginScreen.delivery_location.strip()
         self.ids.location_thankyou.text = f"Your order will arrived to your delivery location ( {LoginScreen.delivery_location}) in under 30 minutes."
+
+    def home_page(self):
+        self.parent.current = "HomeScreen"
+
 
 
 class CheckoutScreen(MDScreen):
@@ -144,6 +168,8 @@ class CheckoutScreen(MDScreen):
         print("Confirm button was clicked")
         self.parent.current = "ThankyouScreen"
 
+    def go_back_to_order(self):
+        self.parent.current = "SnackScreen"
 
 class SnackScreen(MDScreen):
 
@@ -200,7 +226,8 @@ class SnackScreen(MDScreen):
                 print("order from user with user id {}: snack_name: {} , amount: {}, price {} was added to database Snack".format(user_id, snack_name, amount, price))
 
 
-
+    def home_page(self):
+        self.parent.current = "HomeScreen"
 
 
 
@@ -235,6 +262,7 @@ class HomeScreen(MDScreen):
 
     def my_account(self):
         print("My account button clicked")
+        self.parent.current = "MyAccountScreen"
 
     def order_snack(self):
         print("Order snacks (non-active one) clicked")
@@ -287,6 +315,7 @@ class ButtonLabel(ButtonBehavior, MDLabel):
 class LoginScreen(MDScreen):
     current_user = None
     delivery_location = None
+    email = None
 
     def try_login(self):
         email = self.ids.email_input.text
@@ -302,6 +331,7 @@ class LoginScreen(MDScreen):
             print(f"login successful for user with email '{email}")
             LoginScreen.current_user = user_check.id  # getting the ide of the current user
             LoginScreen.delivery_location = user_check.delivery_location  # getting the deliver location of the current user
+            LoginScreen.email = user_check.email #getting the email of the user
             self.parent.current = "HomeScreen"
 
         else:
@@ -316,6 +346,7 @@ class MainApp(MDApp):
 
 
 MainApp().run()
+
 
 
 
@@ -346,6 +377,73 @@ ScreenManager:
 
     ThankyouScreen:
         name: "ThankyouScreen"
+
+    MyAccountScreen:
+        name: "MyAccountScreen"
+
+
+<MyAccountScreen>
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.height, root.width
+
+        FitImage:
+            source: "snackpy.jpeg"
+
+
+    MDCard:
+        size_hint: 0.5, 0.95
+        elevation: 10
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        orientation: "vertical"
+
+
+        MDBoxLayout:
+            id: content #id or name
+            adaptive_height: True
+            orientation: "vertical"
+            padding: dp(30)
+            spacing: dp(20)
+
+
+            MDLabel:
+                text: "CoinSnack"
+                font_style: "H3"
+                halign: "center"
+            MDLabel:
+
+            MDLabel:
+
+            MDLabel:
+
+            MDLabel:
+
+            MDLabel:
+                text: "Account information:"
+                font_style: "H4"
+                halign: "center"
+
+            MDLabel:
+
+            MDLabel:
+
+            MDLabel:
+                id: email
+                font_style: "Subtitle2"
+                halign: "center"
+
+            MDLabel:
+                id: delivery_location
+                font_style: "Subtitle2"
+                halign: "center"
+
+            MDRaisedButton:
+                text: "Return to homepage"
+                halign: "center"
+                on_release:
+                    root.home_page()
+
+
 
 <ThankyouScreen>
     BoxLayout:
@@ -418,6 +516,13 @@ ScreenManager:
             MDLabel:
 
             MDLabel:
+
+            MDRaisedButton:
+                text: "Return to homepage"
+                halign: "center"
+                pos_hint: {'center_x': .3, 'center_y': .3}
+                on_release:
+                    root.home_page()
 
             MDLabel:
 
@@ -520,6 +625,12 @@ ScreenManager:
                 halign: "center"
                 on_release:
                     root.confirm_order()
+
+            MDRaisedButton:
+                text: "Return to keep ordering"
+                halign: "center"
+                on_release:
+                    root.go_back_to_order()
 
 
 
@@ -693,18 +804,34 @@ ScreenManager:
                 helper_text_mode: "on_error"
                 required: True
 
-            MDRaisedButton:
-                text: "Add to cart"
-                halign: "center"
-                on_release:
-                    root.add_to_cart()
+            MDBoxLayout:
+                id: button
+                adaptive_height: True
+                orientation: "horizontal"
+                padding: dp(10)
+                spacing: dp(10)
+
+                MDRaisedButton:
+                    text: "Add to cart"
+                    halign: "center"
+                    pos_hint: {'center_x': .1, 'center_y': .3}
+                    on_release:
+                        root.add_to_cart()
 
 
+                MDRaisedButton:
+                    text: "Check out"
+                    halign: "center"
+                    pos_hint: {'center_x': .2, 'center_y': .3}
+                    on_release:
+                        root.check_out()
+
             MDRaisedButton:
-                text: "Check out"
+                text: "Return to homepage"
                 halign: "center"
+                pos_hint: {'center_x': .3, 'center_y': .3}
                 on_release:
-                    root.check_out()
+                    root.home_page()
 
 
 
@@ -740,12 +867,16 @@ ScreenManager:
 
             MDLabel:
 
-            MDRaisedButton:
+            MDRectangleFlatIconButton:
+                icon: "account-key"
+                pos_hint: {'x': .285}
                 text: "My Account"
                 on_release:
                     root.my_account()
 
-            MDRaisedButton:
+            MDRectangleFlatIconButton:
+                icon: "food"
+                pos_hint: {'x': .265}
                 text: "Order snacks"
                 on_release:
                     root.order_snack()
@@ -844,15 +975,17 @@ ScreenManager:
                 required: True
                 password: True
 
-            MDRaisedButton:
+            MDRectangleFlatIconButton:
+                icon: "food"
                 text: "Register"
                 on_release:
                     root.try_register()
 
-            MDRaisedButton:
+            MDRectangleFlatIconButton:
+                icon: "account-key"
                 text: "Log in"
                 on_release:
-                    root.switch_to_login()
+                    root.parent.current = "LoginScreen"
 
 
 
@@ -914,7 +1047,8 @@ ScreenManager:
                 required: True
                 password: True
 
-            MDRaisedButton:
+            MDRectangleFlatIconButton:
+                icon: "account-key"
                 text: "Log in"
                 on_release:
                     root.try_login()
@@ -923,11 +1057,16 @@ ScreenManager:
                 adaptive_height: True
                 halign: "right"
 
-                ButtonLabel:
-                    text: "REGISTER"
+                MDRectangleFlatIconButton:
+                    icon: "food"
+                    text: "Register"
                     on_press:
                         print("here")
                         root.parent.current = "RegisterScreen"
+
+
+
+
 
 
 
