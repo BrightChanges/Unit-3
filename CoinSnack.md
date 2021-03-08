@@ -350,6 +350,7 @@ MainApp().run()
 
 
 
+
 ```
 
 -main.kv:
@@ -406,10 +407,15 @@ ScreenManager:
             spacing: dp(20)
 
 
-            MDLabel:
-                text: "CoinSnack"
-                font_style: "H3"
-                halign: "center"
+            MDBoxLayout:
+                id: logo_box
+                adaptive_height: True
+                orientation: "vertical"
+
+
+                Image:
+                    source: "CoinSnack_Logo.png"
+
             MDLabel:
 
             MDLabel:
@@ -437,7 +443,24 @@ ScreenManager:
                 font_style: "Subtitle2"
                 halign: "center"
 
-            MDRaisedButton:
+            MDLabel:
+
+            MDLabel:
+
+            MDLabel:
+
+            MDLabel:
+
+            MDLabel:
+
+            MDLabel:
+
+            MDLabel:
+
+            MDLabel:
+
+            MDRectangleFlatIconButton:
+                icon: "home"
                 text: "Return to homepage"
                 halign: "center"
                 on_release:
@@ -470,10 +493,15 @@ ScreenManager:
             spacing: dp(20)
 
 
-            MDLabel:
-                text: "CoinSnack"
-                font_style: "H3"
-                halign: "center"
+            MDBoxLayout:
+                id: logo_box
+                adaptive_height: True
+                orientation: "vertical"
+
+
+                Image:
+                    source: "CoinSnack_Logo.png"
+
             MDLabel:
 
             MDLabel:
@@ -517,7 +545,8 @@ ScreenManager:
 
             MDLabel:
 
-            MDRaisedButton:
+            MDRectangleFlatIconButton:
+                icon: "home"
                 text: "Return to homepage"
                 halign: "center"
                 pos_hint: {'center_x': .3, 'center_y': .3}
@@ -553,15 +582,14 @@ ScreenManager:
             padding: dp(30)
             spacing: dp(20)
 
+            MDBoxLayout:
+                id: logo_box
+                adaptive_height: True
+                orientation: "vertical"
 
-            MDLabel:
-                text: "CoinSnack"
-                font_style: "H3"
-                halign: "center"
 
-            MDLabel:
-
-            MDLabel:
+                Image:
+                    source: "CoinSnack_Logo.png"
 
             MDLabel:
                 text: "Your order"
@@ -620,13 +648,15 @@ ScreenManager:
 
 
 
-            MDRaisedButton:
+            MDRectangleFlatIconButton:
+                icon: "cart-check"
                 text: "Confirm order"
                 halign: "center"
                 on_release:
                     root.confirm_order()
 
-            MDRaisedButton:
+            MDRectangleFlatIconButton:
+                icon: "cart-arrow-down"
                 text: "Return to keep ordering"
                 halign: "center"
                 on_release:
@@ -717,7 +747,7 @@ ScreenManager:
             source: "snackpy.jpeg"
 
     MDCard:
-        size_hint: 0.5, 0.9
+        size_hint: 0.5, 1
         elevation: 10
         pos_hint: {"center_x": 0.5, "center_y": 0.5}
         orientation: "vertical"
@@ -730,17 +760,22 @@ ScreenManager:
             spacing: dp(20)
 
 
-            MDLabel:
-                text: "CoinSnack"
-                font_style: "H4"
-                halign: "center"
+            MDBoxLayout:
+                id: logo_box
+                adaptive_height: True
+                orientation: "vertical"
 
-            MDLabel:
+                Image:
+                    source: "CoinSnack_Logo.png"
+
+
+
+
 
 
             MDLabel:
                 text: "Order your snack:"
-                font_style: "H5"
+                font_style: "H6"
                 halign: "center"
 
             MDLabel:
@@ -773,8 +808,9 @@ ScreenManager:
                 #on_release: toast(dropdown_item.current_item)
     ###
             MDLabel:
-                font_style: "Body1"
+                font_style: "Body2"
                 text: "We are selling Hamburger, Coke, and Popcorn. Their price is as follow Hamburger: ¥300, Coke: ¥100, Popcorn: ¥100. To order, please type in their name down below:"
+                halign: "center"
 
             MDLabel:
 
@@ -783,8 +819,9 @@ ScreenManager:
             MDLabel:
 
             MDLabel:
-                font_style: "Subtitle2"
-                text: "Please add each food each time to the cart. Once you added all the food you want to ordered to the cart, please click the check out button"
+                font_style: "Body2"
+                text: "Please add each food each time to the cart. Once you added all the food you want to ordered to the cart, please click the check out button."
+                halign: "center"
 
             MDLabel:
 
@@ -811,7 +848,8 @@ ScreenManager:
                 padding: dp(10)
                 spacing: dp(10)
 
-                MDRaisedButton:
+                MDRectangleFlatIconButton:
+                    icon: "cart-arrow-down"
                     text: "Add to cart"
                     halign: "center"
                     pos_hint: {'center_x': .1, 'center_y': .3}
@@ -819,14 +857,16 @@ ScreenManager:
                         root.add_to_cart()
 
 
-                MDRaisedButton:
+                MDRectangleFlatIconButton:
+                    icon: "cart-arrow-right"
                     text: "Check out"
                     halign: "center"
                     pos_hint: {'center_x': .2, 'center_y': .3}
                     on_release:
                         root.check_out()
 
-            MDRaisedButton:
+            MDRectangleFlatIconButton:
+                icon: "home"
                 text: "Return to homepage"
                 halign: "center"
                 pos_hint: {'center_x': .3, 'center_y': .3}
@@ -860,23 +900,27 @@ ScreenManager:
             padding: dp(30)
             spacing: dp(20)
 
-            MDLabel:
-                text: "CoinSnack"
-                font_style: "H4"
-                halign: "center"
+            MDBoxLayout:
+                id: logo_box
+                adaptive_height: True
+                orientation: "vertical"
+
+
+                Image:
+                    source: "CoinSnack_Logo.png"
 
             MDLabel:
 
             MDRectangleFlatIconButton:
-                icon: "account-key"
-                pos_hint: {'x': .285}
+                icon: "account-circle"
+                pos_hint: {'x': .315}
                 text: "My Account"
                 on_release:
                     root.my_account()
 
             MDRectangleFlatIconButton:
                 icon: "food"
-                pos_hint: {'x': .265}
+                pos_hint: {'x': .305}
                 text: "Order snacks"
                 on_release:
                     root.order_snack()
@@ -917,6 +961,7 @@ ScreenManager:
 
 #How to change the c0lor of background of a MDCard
 
+
         MDBoxLayout:
             id: content #id or name
             adaptive_height: True
@@ -925,9 +970,17 @@ ScreenManager:
             spacing: dp(20)
 
             MDLabel:
-                text: "CoinSnack"
-                font_style: "H3"
-                halign: "center"
+
+            MDLabel:
+
+            MDBoxLayout:
+                id: logo_box
+                adaptive_height: True
+                orientation: "vertical"
+
+
+                Image:
+                    source: "CoinSnack_Logo.png"
 
             MDLabel:
 
@@ -935,8 +988,8 @@ ScreenManager:
 
 
             MDLabel:
-                text: "REGISTER"
-                font_style: "H4"
+                text: "Register"
+                font_style: "H6"
                 halign: "center"
 
             MDLabel:
@@ -1006,7 +1059,6 @@ ScreenManager:
         orientation: "vertical"
 
 
-
 #How to change the c0lor of background of a MDCard
 
         MDBoxLayout:
@@ -1016,18 +1068,28 @@ ScreenManager:
             padding: dp(30)
             spacing: dp(20)
 
-            MDLabel:
-                text: "CoinSnack"
-                font_style: "H3"
-                halign: "center"
+
 
             MDLabel:
 
             MDLabel:
 
+            MDBoxLayout:
+                id: logo_box
+                adaptive_height: True
+                orientation: "vertical"
+
+
+                Image:
+                    source: "CoinSnack_Logo.png"
+
+
+
+
+
             MDLabel:
-                text: "LOGIN"
-                font_style: "H4"
+                text: "Login"
+                font_style: "H6"
                 halign: "center"
 
             MDTextField:
