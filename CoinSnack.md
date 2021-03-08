@@ -184,7 +184,7 @@ class CheckoutScreen(MDScreen):
 
 class SnackScreen(MDScreen):
 
-    # string123 = StringProperty("")
+   
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -200,7 +200,6 @@ class SnackScreen(MDScreen):
     def add_to_cart(self):
         price_per_product = 0
         print("Add to cart button was pressed")
-        # print(LoginScreen.current_user) #LoginScreen.current_user is the id of the user
         user_id = LoginScreen.current_user
         snack_name = self.ids.snack_name.text
         amount = self.ids.snack_amount.text
@@ -312,7 +311,6 @@ class LoginScreen(MDScreen):
         password = self.ids.password_input.text
         print(email,password)
         s = session()
-        # THIS QUERY CODE BELOW only work if I add .first()=>ask Dr Ruben why so?
         user_check = s.query(User).filter_by(email=email, password=password).first()
         print(user_check)
 
@@ -765,31 +763,6 @@ ScreenManager:
                 on_release:
                     root.see_snacks()
 
-    ###Trying to create a swiper:
-            #MDSwiper:
-                #size_hint_y: None
-                #height: root.height
-                #y: root.height - self.height
-                #on_swipe: self.get_current_item().ids.icon.shake()
-
-                #MySwiper:
-
-                #MySwiper1:
-    ###
-
-    ###Trying to create a dropdown:
-            #MDDropDownItem:
-                #id: dropdown_item
-                #text: 'Hamburger'
-                #pos_hint: {'center_x': .5, 'center_y': .6}
-                #current_item: 'Hamburger'
-                #on_release: root.menu.open()
-
-            #MDRaisedButton:
-                #pos_hint: {'center_x': .5, 'center_y': .3}
-                #text: 'Check Item'
-                #on_release: toast(dropdown_item.current_item)
-    ###
             MDLabel:
 
             MDLabel:
@@ -951,7 +924,6 @@ ScreenManager:
         pos_hint: {"center_x": 0.5, "center_y": 0.5}
         orientation: "vertical"
 
-#How to change the c0lor of background of a MDCard
 
 
         MDBoxLayout:
@@ -1046,7 +1018,6 @@ ScreenManager:
         orientation: "vertical"
 
 
-#How to change the c0lor of background of a MDCard
 
         MDBoxLayout:
             id: content #id or name
