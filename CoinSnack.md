@@ -37,7 +37,7 @@ Fig.2 Other sketches of Coin Snack
 
 ```.py
 
-##WORKING IN PROGRESS!!!
+#Importing all the necessary libraries or widgets'codes
 from kivy.lang import Builder
 from sqlalchemy import Column, DateTime, String, Integer, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
@@ -58,13 +58,16 @@ from kivy.uix.label import Label
 from datetime import date
 from kivymd.uix.list import OneLineListItem
 
+#creating a base to connect with the database
 Base = declarative_base()
 
 
+#creating a screen manager for kivy
 class ScreenManagement(ScreenManager):
     pass
 
 
+#creating the table user in the database
 class User(Base):
     __tablename__ = 'user'
     id = Column(Integer, primary_key=True, unique=True)
@@ -73,11 +76,11 @@ class User(Base):
     delivery_location = Column(String)
 
 
-    # relationship "has in the ER diagram" one-to-many
+    #the relationship between the user table and the snack table is one-to-many:
     snacks = relationship("Snack", backref="user")
 
 
-#Need to update the ER Diagram on Github!
+#creating the table snack in the database
 class Snack(Base):
     __tablename__ = "snack"
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -97,15 +100,16 @@ from sqlalchemy.orm import sessionmaker
 session = sessionmaker()
 session.configure(bind=engine)
 Base.metadata.create_all(engine)
+##
 
-
+#creating the backend code for Kivy's ImageScreen
 class ImageScreen(MDScreen):
 
     def go_back_to_order(self):
         self.parent.current = "SnackScreen"
 
 
-
+#creating the backend code for Kivy's MyAccountScreen
 class MyAccountScreen(MDScreen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -124,7 +128,7 @@ class MyAccountScreen(MDScreen):
 
 
 
-
+#creating the backend code for Kivy's ThankyouScreen
 class ThankyouScreen(MDScreen):
 
     def __init__(self, **kwargs):
@@ -143,7 +147,7 @@ class ThankyouScreen(MDScreen):
         self.parent.current = "HomeScreen"
 
 
-
+#creating the backend code for Kivy's CheckoutScreen
 class CheckoutScreen(MDScreen):
 
     def __init__(self, **kwargs):
@@ -182,6 +186,8 @@ class CheckoutScreen(MDScreen):
     def go_back_to_order(self):
         self.parent.current = "SnackScreen"
 
+
+#creating the backend code for Kivy's SnackScreen
 class SnackScreen(MDScreen):
 
    
@@ -243,7 +249,7 @@ class SnackScreen(MDScreen):
         self.parent.current = "HomeScreen"
 
 
-
+#creating the backend code for Kivy's HomeScreen
 class HomeScreen(MDScreen):
 
     def my_account(self):
@@ -301,6 +307,7 @@ class ButtonLabel(ButtonBehavior, MDLabel):
     pass
 
 
+#creating the backend code for Kivy's LoginScreen
 class LoginScreen(MDScreen):
     current_user = None
     delivery_location = None
@@ -326,13 +333,14 @@ class LoginScreen(MDScreen):
             print("User does not exist")
 
 
+#creating the backend code for Kivy's whole app
 class MainApp(MDApp):
 
     def build(self):
         self.theme_cls.primary_palette = "Indigo"
 
 
-
+#The code that will run the whole Kivy's app
 MainApp().run()
 
 
