@@ -22,7 +22,7 @@ Fig.2 Other sketches of Coin Snack
 ## Criteria B: Design
 #### System Diagram
 
-![](https://github.com/BrightChanges/Unit-3/blob/main/CoinSnack%20System%20Diagram.png)
+![](https://github.com/BrightChanges/Unit-3/blob/main/CoinSnack%20System%20Diagram%20(1).png)
 
 #### ER Diagram (DO THIS DIGITALLY AFTER THE WHOLE PROGRAM WORKED)
 
@@ -31,7 +31,7 @@ Fig.2 Other sketches of Coin Snack
 1st development story:
 
 
-#### Codes (SO FAR <=REMOVE THIS ONCE COMPLETED):
+#### Codes:
 
 -main.py:
 
@@ -1139,6 +1139,9 @@ ScreenManager:
                     on_press:
                         print("here")
                         root.parent.current = "RegisterScreen"
+
+
+
 
 
 
