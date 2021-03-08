@@ -6,7 +6,7 @@
 ### Context of the product
 My client is Owen, a student in my school. In conversation with Owen (see appendix A), he says that at night, he couldn't buy snacks at the cafeteria and he would love someone could provide him the opportunity to buy snacks easily at night. 
 
-Link to appendix A: ![](https://github.com/BrightChanges/Unit-3/blob/main/CS%20Mini%20IA%20interview.m4a)
+Link to appendix A:  https://github.com/BrightChanges/Unit-3/blob/main/CS%20Mini%20IA%20interview.m4a
 
 From this interview with Owen, I decided to create an app that lets Owen order snacks at night called CoinSnack.
 It will let Owen choose and order snacks, printing the receipts and stores his order in the app's database, where the data could possibily be sent to the delivery person and the snack company. (In this Mini-IA, I will not demonstrate how the data is sent to the delivery person.)
