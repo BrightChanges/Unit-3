@@ -1,10 +1,13 @@
 
-### Quiz 22
+### Quiz 21
 
 
-##### Code
+#### Solution
+
+
+##### Codes:
+
 ```.py
-
 
 class quiz22():
 
@@ -43,5 +46,8 @@ print(test3.function())
 test4= quiz22("(codin) + (game) = (codingame)")
 print(test4.function())
 
-
 ```
+
+##### Testing:
+
+![](https://github.com/BrightChanges/Unit-3/blob/main/Screen%20Shot%200003-03-08%20at%202.11.15%20PM.png)
