@@ -245,33 +245,6 @@ class SnackScreen(MDScreen):
 
 
 
-
-
-
-
-
- #######The code below is for the dropdown, is not working so currently stop developing:
-    #     menu_items = [{"text": "Hamburger"}, {"text": "Noodle"} ]
-    #
-    #     self.menu = MDDropdownMenu(
-    #         #THIS CODE BELOW IS CAUSING ERROR!:
-    #         # caller = self.ids.dropdown_item,
-    #         ######################################
-    #         items = menu_items,
-    #         position = "center",
-    #         width_mult=4,
-    #     )
-    #     self.menu.bind(on_release=self.set_item)
-    #
-    # value_hold = 0
-    #
-    # def set_item(self, instance_menu, instance_menu_item):
-    #     self.ids.dropdown_item.set_item(instance_menu_item.text)
-    #     instance_menu.dismiss()
-    #
-
-
-
 class HomeScreen(MDScreen):
 
     def my_account(self):
@@ -651,7 +624,7 @@ ScreenManager:
         pos_hint: {"center_x": 0.5, "center_y": 0.5}
         orientation: "vertical"
 
-#How to change the color of background of a MDCard
+
 
         MDBoxLayout:
             id: content #id or name
