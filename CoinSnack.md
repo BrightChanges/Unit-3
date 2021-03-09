@@ -383,8 +383,7 @@ MainApp().run()
 -main.kv:
 
 ```.py
-#:import toast kivymd.toast.toast
-
+#creating the screen manager for multiple screens
 ScreenManager:
     id: scr_manager
 
@@ -413,12 +412,13 @@ ScreenManager:
         name: "ImageScreen"
 
 
+#creating the title for the image
 <MyTile@SmartTileWithLabel>
     size_hint_y: None
     height: "240dp"
 
 
-
+#The screen for the food images
 <ImageScreen>
 
 
@@ -434,6 +434,7 @@ ScreenManager:
 
     ScrollView:
 
+        #codeds to show the image grids
         MDGridLayout:
             cols: 3
             adaptive_height: True
@@ -554,7 +555,7 @@ ScreenManager:
                     root.home_page()
 
 
-
+#the screen for the thank you page
 <ThankyouScreen>
     BoxLayout:
         orientation: 'vertical'
@@ -644,6 +645,7 @@ ScreenManager:
             MDLabel:
 
 
+#the screen for the checkout screen
 <CheckoutScreen>
     BoxLayout:
         orientation: 'vertical'
@@ -754,7 +756,7 @@ ScreenManager:
 
 
 
-
+# the screen to order snacks
 <SnackScreen>:
 
     BoxLayout:
@@ -799,6 +801,7 @@ ScreenManager:
                 pos_hint: {'x': .18}
                 on_release:
                     root.see_snacks()
+
 
             MDLabel:
 
@@ -870,7 +873,7 @@ ScreenManager:
 
 
 
-
+#the home screen
 <HomeScreen>:
 #this is for the visual
     BoxLayout:
@@ -886,7 +889,7 @@ ScreenManager:
         pos_hint: {"center_x": 0.5, "center_y": 0.5}
         orientation: "vertical"
 
-#How to change the c0lor of background of a MDCard
+
 
         MDBoxLayout:
             id: content #id or name
@@ -960,6 +963,7 @@ ScreenManager:
         elevation: 10
         pos_hint: {"center_x": 0.5, "center_y": 0.5}
         orientation: "vertical"
+
 
 
 
@@ -1120,6 +1124,8 @@ ScreenManager:
                     on_press:
                         print("here")
                         root.parent.current = "RegisterScreen"
+
+
 
 
 
