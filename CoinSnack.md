@@ -244,6 +244,7 @@ class SnackScreen(MDScreen):
             if int(amount) > 50 or int(amount) < 1:
                 print("The ordering amount is too much or too little.")
             else:
+                # if user inputs are valid, further processed (including adding the data to the database) will be proceeded
                 if (snack_name == "Hamburger" or snack_name ==  "hamburger"):
                     price_per_product = 300
 
@@ -295,13 +296,15 @@ class RegisterScreen(MDScreen):
         password_add = self.ids.password_input.text
         password_repeat = self.ids.password_check.text
         print(email, delivery_location, password_add, password_repeat)
-
+        
+        #checking if the user had input 2 same password
         if password_add == password_repeat:
             s = session()
             email = self.ids.email_input.text
             password = self.ids.password_input.text
             print(email, password)
-
+            
+            #checking if the registering email is already in the database or not
             email_check = s.query(User).filter_by(email=email).first()  ##similar to fetchone()
 
             if email_check:
@@ -309,6 +312,8 @@ class RegisterScreen(MDScreen):
                 s.close()
 
             else:
+                #if the registering email is not already registered in the database,
+                #the software will create the account for the user
                 user = User(email=email, delivery_location=delivery_location, password=password)
                 s.add(user)
 
@@ -324,13 +329,16 @@ class RegisterScreen(MDScreen):
         self.parent.current = "LoginScreen"
 
 
+#a class for a ButtonLabel in the kifvy file (main.kv)
 class ButtonLabel(ButtonBehavior, MDLabel):
     pass
 
 
 #creating the backend code for Kivy's LoginScreen
 class LoginScreen(MDScreen):
-    current_user = None
+    # all 3 codes below set up variables that store user information after the user logged in 
+    #through the LoginScreen
+    current_user = None 
     delivery_location = None
     email = None
 
@@ -345,9 +353,9 @@ class LoginScreen(MDScreen):
         if user_check:
             s.close()
             print(f"login successful for user with email '{email}")
-            LoginScreen.current_user = user_check.id  # getting the ide of the current user
+            LoginScreen.current_user = user_check.id  # getting the id of the current user
             LoginScreen.delivery_location = user_check.delivery_location  # getting the deliver location of the current user
-            LoginScreen.email = user_check.email #getting the email of the user
+            LoginScreen.email = user_check.email #getting the email of the current user
             self.parent.current = "HomeScreen"
 
         else:
