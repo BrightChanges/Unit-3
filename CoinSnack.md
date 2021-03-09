@@ -104,22 +104,34 @@ Base.metadata.create_all(engine)
 
 #creating the backend code for Kivy's ImageScreen
 class ImageScreen(MDScreen):
-
+    
+    #functions like one below could initiate some kind of actions to the app when 
+    #they are called from buttons in the kivy file (main.kv).
     def go_back_to_order(self):
+    
+        #codes like one below switch screen for the app
         self.parent.current = "SnackScreen"
 
 
 #creating the backend code for Kivy's MyAccountScreen
 class MyAccountScreen(MDScreen):
+    
+    #initilization functions like the one below initialize items that could be resused in other function.
+    #an extremely helpful function to stores data temporarily and let other function acesss them.
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.delivery_location = LoginScreen.delivery_location
         self.email = LoginScreen.email
-
+    
+    #this function on_pre_enter is a special kivy function that automatically
+    #initiate a function once an user enter a screen.
     def on_pre_enter(self, *args):
         self.my_account()
-
+    
     def my_account(self):
+        
+        #by taking the ids of the text from the kivy file, I could display the text from 
+        #the backend python file (main.py) to the front end kivy screen (main.kv)
         self.ids.delivery_location.text = f"Your delivery location: {LoginScreen.delivery_location}"
         self.ids.email.text = f"Your email: {LoginScreen.email}"
 
@@ -162,7 +174,11 @@ class CheckoutScreen(MDScreen):
     def checkout(self):
         order_list = ""
         price = 0
+        
+        #creating connection to my database
         s = session()
+        
+        #a query command that query all the rows in the database table snack that have user_id equal to the user id of the current_id
         order_check = s.query(Snack).filter_by(user_id=LoginScreen.current_user).all()
 
         print(f"Delivery location is at {LoginScreen.delivery_location}")
