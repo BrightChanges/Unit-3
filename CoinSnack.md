@@ -310,7 +310,13 @@ class RegisterScreen(MDScreen):
             if email_check:
                 print("User already exists")
                 s.close()
-
+            
+            #make sure that the input for the registering email address from the user is at an email
+            elif "@" not in email:
+                self.ids.email_input.error = True
+                self.ids.email_input.helper_text = "Email is not valid"
+                print("Email is invalid")
+                
             else:
                 #if the registering email is not already registered in the database,
                 #the software will create the account for the user
