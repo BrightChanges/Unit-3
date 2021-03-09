@@ -152,6 +152,7 @@ class ThankyouScreen(MDScreen):
         self.thankyou()
 
     def thankyou(self):
+        #remove space from the LoginScreen.delivery_location (which is a string)
         LoginScreen.delivery_location.strip()
         self.ids.location_thankyou.text = f"Your order will arrived to your delivery location ( {LoginScreen.delivery_location}) in under 30 minutes."
 
@@ -172,7 +173,9 @@ class CheckoutScreen(MDScreen):
 
 
     def checkout(self):
+        #creating a blank string called order_list to stores the receipts information the user ordered
         order_list = ""
+        #initialize the price variable so that I could used it later on.
         price = 0
         
         #creating connection to my database
@@ -183,6 +186,8 @@ class CheckoutScreen(MDScreen):
 
         print(f"Delivery location is at {LoginScreen.delivery_location}")
         print(f"Total order of user with id {LoginScreen.delivery_location}:")
+        
+        #as order_check are multiple data rows, I need to use a for loop to get each variable of each row out for printing
         for i in range(len(order_check)):
             order_list += '\n' + "| No."+ str(i+1) + " | " + "Name: " + str(order_check[i].name).capitalize() + "| Amount: " + str(order_check[i].amount) + " | Price: " + str(order_check[i].price)+"¥ |"
             price += order_check[i].price
@@ -206,8 +211,6 @@ class CheckoutScreen(MDScreen):
 #creating the backend code for Kivy's SnackScreen
 class SnackScreen(MDScreen):
 
-   
-
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.id = LoginScreen.current_user
@@ -220,17 +223,19 @@ class SnackScreen(MDScreen):
         self.parent.current = "CheckoutScreen"
 
     def add_to_cart(self):
+        #initialize the pricce of each product
         price_per_product = 0
         print("Add to cart button was pressed")
         user_id = LoginScreen.current_user
         snack_name = self.ids.snack_name.text
         amount = self.ids.snack_amount.text
-
+        
+        #validation process codes to ensure that inputs form the user is valid:
         if snack_name != "Hamburger" and snack_name != "hamburger" and snack_name != "Coke" and snack_name != "coke" and snack_name!= "Popcorn"\
                 and snack_name!="popcorn":
 
             print("Invalid food order")
-
+        
         elif amount.isnumeric() == False:
             print("Invalid amount")
 
