@@ -1142,7 +1142,7 @@ ScreenManager:
 
 ```
 
-2st development story:
+2st development story: Another struggle I encoutered when developing CoinSnack was how to display an image on the screen. It took me hours of doing trials and errors, researching to finally found out that in order to display an image from the kivy file (main.kv), I need to put that image label inside a layout label such as MDBoxLayout. While I could solve this problem quicker than the problem in 1st development story, this problem still took me a lot of time. However, same as the previous problem, after I was able to solve this problem, I even believe stronger that I could solve any coding problems if I commit myself into finding its solution.
 
 
 ## Criteria D: Functionality
