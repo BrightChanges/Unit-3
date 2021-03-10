@@ -28,7 +28,7 @@ Fig.2 Other sketches of Coin Snack
 
 ![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_4857.jpg)
 ## Criteria C: Development
-1st development story:
+1st development story: The biggest struggle I got while I create this CoinSnack app is when I didn't know how to display text from python file (main.py) to the screen from kivy file (main.kv). I know I could easily solve this problem by going to Stack Overflow and ask, but then I know I can't do that every time as there is a limit for the amount of questions I can ask. So, I tried to not do that and see if I could go learn and solve the problem by myself. I took 2 hours everyday, for 5 days straight, searching and reading through the Internet, then I tried following those examples and coded. However, none of them worked until on the final day where I nearly gave up and decided to ask my Computer Science teacher tomorrow, I saw a Youtube video (https://www.youtube.com/watch?v=TEpHeuH7wNw&ab_channel=ErikSandberg) with the title "Kivy Core Concept - Using an `id` to Reference a Widget" and found the solution to solve my problem. If you look at the Youtube video's title, you can see that it is not related to text or anything at all. You can see that I cleary was desperate and was just watching every video I think could gave me some ideas to solve the problem. After I was able to solve this struggle, I learnt that I could solve any computer science/coding problem if I tried hard and put my mind into it.
 
 
 #### Codes:
