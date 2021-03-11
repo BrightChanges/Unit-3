@@ -365,7 +365,7 @@ class LoginScreen(MDScreen):
             self.parent.current = "HomeScreen"
 
         else:
-            print("User does not exist")
+            print("User does not exist or wrong password/email")
 
 
 #creating the backend code for Kivy's whole app
