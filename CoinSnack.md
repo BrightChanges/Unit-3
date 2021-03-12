@@ -4,29 +4,36 @@
 
 ## Criteria A: Planning
 ### Context of the product
-My client is Owen, a student in my school. In conversation with Owen (see appendix A), he says that at night, he couldn't buy snacks at the cafeteria and he would love someone could provide him the opportunity to buy snacks easily at night. 
+My client is Owen, a student in my school. In conversation with Owen (see appendix A), Owen says that he can buy snack from the cafeteria, but sometimes, he don’t want to go to the cafeteria to buy them and just want to stay indoor. So, he would want me to create a communication system that takes his order online and send that order to the cafeteria, where its staff could do further procedure.
 
 Link to appendix A:  https://github.com/BrightChanges/Unit-3/blob/main/CS%20Mini%20IA%20interview.m4a
 
-From this interview with Owen, I decided to create an app that lets Owen order snacks at night called CoinSnack.
-It will let Owen choose and order snacks, printing the receipts and stores his order in the app's database, where the data could possibily be sent to the delivery person and the snack company. (In this Mini-IA, I will not demonstrate how the data is sent to the delivery person.)
+Listening to this interview, I identified the problem that Owen was having: There is no online communication system between him and the cafeteria. So, I decided to come up with a solution: I will make an app called CoinSnack that let Owen choose the snacks he want to order, store it, show him the receipt, and store that orders in the app’s database. While this Mini IA won’t solve the problem, it will provide the necessary codes that help solve the problem .Further codes in the future could then make it possible for the cafeteria’s staff to receive Owen’s snacks’ orders from the database. For now, with the limitation of time, I will just stop at the storing order part.
 
 #### Sketches of Ideas
 
 ![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_4837.JPG)
 Fig.1 Sketches of Coin Snack
+Description:
 
 ![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_4838.jpg)
 Fig.2 Other sketches of Coin Snack
+Description:
 
 ## Criteria B: Design
 #### System Diagram
 
 ![](https://github.com/BrightChanges/Unit-3/blob/main/CoinSnack%20System%20Diagram%20(1).png)
+Fig. 3 System digram of CoinSnack app
+Descripton:
 
 #### ER Diagram (DO THIS DIGITALLY AFTER THE WHOLE PROGRAM WORKED)
 
 ![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_4857.jpg)
+Fig.4 ER Diagram of CoinSnack app's database
+Description: 
+
+
 ## Criteria C: Development
 1st development story: The biggest struggle I got while I create this CoinSnack app is when I didn't know how to display text from python file (main.py) to the screen from kivy file (main.kv). I know I could easily solve this problem by going to Stack Overflow and ask, but then I know I can't do that every time as there is a limit for the amount of questions I can ask. So, I tried to not do that and see if I could go learn and solve the problem by myself. I took 2 hours everyday, for 5 days straight, searching and reading through the Internet, then I tried following those examples and coded. However, none of them worked until on the final day where I nearly gave up and decided to ask my Computer Science teacher tomorrow, I saw a Youtube video (https://www.youtube.com/watch?v=TEpHeuH7wNw&ab_channel=ErikSandberg) with the title "Kivy Core Concept - Using an `id` to Reference a Widget" and found the solution to solve my problem. If you look at the Youtube video's title, you can see that it is not related to text or anything at all. You can see that I cleary was desperate and was just watching every video I think could gave me some ideas to solve the problem. After I was able to solve this struggle, I learnt that I could solve any computer science/coding problem if I tried hard and put my mind into it.
 
