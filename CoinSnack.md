@@ -365,7 +365,7 @@ class LoginScreen(MDScreen):
 
         if user_check:
             s.close()
-            print(f"login successful for user with email '{email}")
+            print(f"login successful for user with email {email}")
             LoginScreen.current_user = user_check.id  # getting the id of the current user
             LoginScreen.delivery_location = user_check.delivery_location  # getting the deliver location of the current user
             LoginScreen.email = user_check.email #getting the email of the current user
