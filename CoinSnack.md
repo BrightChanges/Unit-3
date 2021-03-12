@@ -1146,13 +1146,13 @@ ScreenManager:
 
 
 ## Criteria D: Functionality
-#### Alpha Testing:
+#### Alpha Testing (following the Unit Testing, Code Review, Integration testing success criteria tables):
 Link to the desmontration video:...
 
-#### Beta Testing with colleagues:
+#### Beta Testing with colleagues (following the Software testing success criteria table):
 Link to the desmontration video:...
 
-#### Acceptance Testing with client:
+#### Acceptance Testing with client (following User acceptance testing table):
 Link to the desmontration video:...
 
 ...
@@ -1167,7 +1167,9 @@ Fig. Picture 3 of CoinSnack
 
 
 ## Criteria E: Evaluation
-##### Success Criteria (!IN PROGESS!)
+#### Procedures in the success criteria table need to be very specific. It is one of the most important aspect for the grade of Criteria E.
+#### Success Criteria for Alpha Testing (combination of Unit Testing, Code Review, Integration testing) (!IN PROGESS!)
+
 
 | Criteria                                                                                                                                                                                  | Expected outcome                                                                                                                                                                                                                                                                                                   | Met? |
 |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------|
