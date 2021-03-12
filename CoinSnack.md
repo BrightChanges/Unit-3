@@ -14,24 +14,24 @@ Listening to this interview, I identified the problem that Owen was having: Ther
 
 ![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_4837.JPG)
 Fig.1 Sketches of Coin Snack
-Description:
+/Description:
 
 ![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_4838.jpg)
 Fig.2 Other sketches of Coin Snack
-Description:
+/Description:
 
 ## Criteria B: Design
 #### System Diagram
 
 ![](https://github.com/BrightChanges/Unit-3/blob/main/CoinSnack%20System%20Diagram%20(1).png)
 Fig. 3 System digram of CoinSnack app
-Descripton:
+/Descripton:
 
 #### ER Diagram (DO THIS DIGITALLY AFTER THE WHOLE PROGRAM WORKED)
 
 ![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_4857.jpg)
 Fig.4 ER Diagram of CoinSnack app's database
-Description: 
+/Description: 
 
 
 ## Criteria C: Development
@@ -1163,13 +1163,13 @@ Link to the desmontration video:...
 Link to the desmontration video:...
 
 ...
-Fig. Picture 1 of CoinSnack
+Fig. Picture 1 of CoinSnack /Description:
 
 ...
-Fig. Picture 2 of CoinSnack
+Fig. Picture 2 of CoinSnack /Description:
 
 ...
-Fig. Picture 3 of CoinSnack 
+Fig. Picture 3 of CoinSnack /Description:
 
 
 
