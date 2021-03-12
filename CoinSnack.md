@@ -4,7 +4,7 @@
 
 ## Criteria A: Planning
 ### Context of the product
-My client is Owen, a student in my school. In conversation with Owen (see appendix A), Owen says that he can buy snack from the cafeteria, but sometimes, he don’t want to go to the cafeteria to buy them and just want to stay indoor. So, he would want me to create a communication system that takes his order online and send that order to the cafeteria, where its staff could do further procedure.
+My client is Owen, a student in my school. In conversation with Owen (see appendix A), Owen says that he can buy snack from the cafeteria, but sometimes, he don’t want to go to the cafeteria to buy them and just want to stay indoor. So, he would want me to create a communication system that takes his order online and send that order to the cafeteria, where its staff could do further procedure. He also added that as some of his housemates would want to use this same system, he says that he would want my software to have a Log In and Account Register processes. 
 
 Link to appendix A:  https://github.com/BrightChanges/Unit-3/blob/main/CS%20Mini%20IA%20interview.m4a
 
