@@ -6,7 +6,7 @@
 ### Context of the product
 My client is Owen, a student in my school. In conversation with Owen (see appendix A), Owen says that he can buy snack from the cafeteria, but sometimes, he don’t want to go to the cafeteria to buy them and just want to stay indoor. So, he would want me to create a communication system that takes his order online and send that order to the cafeteria, where its staff could do further procedure. He also added that as some of his housemates would want to use this same system, he says that he would want my software to have a Log In and Account Register processes. 
 
-Link to appendix A:  https://github.com/BrightChanges/Unit-3/blob/main/CS%20Mini%20IA%20interview.m4a
+Link to appendix A:  https://github.com/BrightChanges/Unit-3/blob/main/CS%20Mini%20IA%20interview2.m4a
 
 Listening to this interview, I identified the problem that Owen was having: There is no online communication system between him and the cafeteria. So, I decided to come up with a solution: I will make an app called CoinSnack that let Owen choose the snacks he want to order, store it, show him the receipt, and store that orders in the app’s database. While this Mini IA won’t solve the problem, it will provide the necessary codes that help solve the problem .Further codes in the future could then make it possible for the cafeteria’s staff to receive Owen’s snacks’ orders from the database. For now, with the limitation of time, I will just stop at the storing order part.
 
