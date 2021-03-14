@@ -1154,7 +1154,7 @@ ScreenManager:
 
 ## Criteria D: Functionality
 #### Alpha Testing (following the Unit Testing, Code Review, Integration testing success criteria tables):
-Link to the desmontration video:...
+Link to the desmontration video: https://www.youtube.com/watch?v=5bLuxCFvfaw&ab_channel=TheWeeklyShow
 
 #### Beta Testing with colleagues (following the Software testing success criteria table):
 Link to the desmontration video:...
