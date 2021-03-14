@@ -1163,27 +1163,35 @@ Link to the desmontration video: https://www.youtube.com/watch?v=fdk8MJdTY0A&ab_
 Link to the desmontration video: https://www.youtube.com/watch?v=E7qf6qQcFf0&ab_channel=TheWeeklyShow
 
 ![](https://github.com/BrightChanges/Unit-3/blob/main/Screen%20Shot%200003-03-14%20at%2011.37.17.png)
+
 Fig.5 Picture of CoinSnack's Login Screen /Description: The Login Screen of CoinSnack app where the client could log in to the app using their account.
 
 ![](https://github.com/BrightChanges/Unit-3/blob/main/Screen%20Shot%200003-03-14%20at%2011.37.35.png)
+
 Fig.6 Picture of CoinSnack's Register Screen /Description: The Register Screen of CoinSnack app where the client could register CoinSnack's account.
 
 ![](https://github.com/BrightChanges/Unit-3/blob/main/Screen%20Shot%200003-03-14%20at%2011.37.48.png)
+
 Fig.7 Picture of CoinSnack's Home Screen /Description: The Home Screen of CoinSnack app where the client could proceed with different functions.
 
 ![](https://github.com/BrightChanges/Unit-3/blob/main/Screen%20Shot%200003-03-14%20at%2011.37.53.png)
+
 Fig.8 Picture of CoinSnack's Snack Ordering Screen /Description: The Snack Ordering Screen of CoinSnack app that lets the client to add snacks they want to order to his or her virtual CoinSnack cart.
 
 ![](https://github.com/BrightChanges/Unit-3/blob/main/Screen%20Shot%200003-03-14%20at%2011.37.57.png)
+
 Fig.9 Picture of CoinSnack's Snack Picture Screen /Description: The Snack Picture Screen of CoinSnack app that lets the client to see images of the snacks.
 
 ![](https://github.com/BrightChanges/Unit-3/blob/main/Screen%20Shot%200003-03-14%20at%2011.38.02.png)
+
 Fig.10 Picture of CoinSnack's Confimration Screen /Description: The Confirmation Screen of CoinSnack app that lets the client to confirm their snacks' order.
 
 ![](https://github.com/BrightChanges/Unit-3/blob/main/Screen%20Shot%200003-03-14%20at%2011.38.06.png)
+
 Fig.11 Picture of CoinSnack's Thank you Screen /Description: The Thank you Screen of CoinSnack app that sends a thank you message to the client after his or her confirmed his or her order.
 
 ![](https://github.com/BrightChanges/Unit-3/blob/main/Screen%20Shot%200003-03-14%20at%2011.38.12.png)
+
 Fig.12 Picture of CoinSnack's My Account Screen /Description: The My Account Screen of CoinSnack app that lets user checks and see their account's informations.
 
 ## Criteria E: Evaluation
