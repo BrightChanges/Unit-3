@@ -1160,7 +1160,7 @@ Link to the desmontration video: https://www.youtube.com/watch?v=5bLuxCFvfaw&ab_
 Link to the desmontration video: https://www.youtube.com/watch?v=fdk8MJdTY0A&ab_channel=TheWeeklyShow
 
 #### Acceptance Testing with client (following User acceptance testing table):
-Link to the desmontration video:...
+Link to the desmontration video: https://www.youtube.com/watch?v=E7qf6qQcFf0&ab_channel=TheWeeklyShow
 
 ...
 Fig. Picture 1 of CoinSnack /Description:
