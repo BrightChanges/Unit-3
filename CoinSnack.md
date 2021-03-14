@@ -25,13 +25,13 @@ Fig.2 Other sketches of Coin Snack
 
 ![](https://github.com/BrightChanges/Unit-3/blob/main/CoinSnack%20System%20Diagram%20(1).png)
 Fig. 3 System diagram of CoinSnack app
-/Descripton: 
+/Descripton: The CoinSnack apps receives inputs such as snack name, delivery location, email from the client, processes these data with its codes, and returns outputs such as a receipt, and storing those data into its database.
 
 #### ER Diagram (DO THIS DIGITALLY AFTER THE WHOLE PROGRAM WORKED)
 
 ![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_4857.jpg)
 Fig.4 ER Diagram of CoinSnack app's database
-/Description: The CoinSnack apps receives inputs such as snack name, delivery location, email from the client, processes these data with its codes, and returns outputs such as a receipt, and storing those data into its database.
+/Description: The ER Diagram shows that CoinSnack app's database has 2 data tables: User & Snack. The User table has id as the primary key and other columns like email, password, delivery location. The Snack table has id as the primary key, and other columns like name, price, amount.
 
 
 ## Criteria C: Development
