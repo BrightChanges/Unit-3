@@ -14,24 +14,24 @@ Listening to this interview, I identified the problem that Owen was having: Ther
 
 ![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_4837.JPG)
 Fig.1 Sketches of Coin Snack
-/Description:
+/Description: Sketches showing my design for the LogIn screen, Home screen, Snack ordering screen, Check out (Confirmation) screen.
 
 ![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_4838.jpg)
 Fig.2 Other sketches of Coin Snack
-/Description:
+/Description: Sketches showing my design for the Register screen, Thank you screen
 
 ## Criteria B: Design
 #### System Diagram
 
 ![](https://github.com/BrightChanges/Unit-3/blob/main/CoinSnack%20System%20Diagram%20(1).png)
-Fig. 3 System digram of CoinSnack app
-/Descripton:
+Fig. 3 System diagram of CoinSnack app
+/Descripton: 
 
 #### ER Diagram (DO THIS DIGITALLY AFTER THE WHOLE PROGRAM WORKED)
 
 ![](https://github.com/BrightChanges/Unit-3/blob/main/IMG_4857.jpg)
 Fig.4 ER Diagram of CoinSnack app's database
-/Description: 
+/Description: The CoinSnack apps receives inputs such as snack name, delivery location, email from the client, processes these data with its codes, and returns outputs such as a receipt, and storing those data into its database.
 
 
 ## Criteria C: Development
