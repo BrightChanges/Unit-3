@@ -1157,7 +1157,7 @@ ScreenManager:
 Link to the desmontration video: https://www.youtube.com/watch?v=5bLuxCFvfaw&ab_channel=TheWeeklyShow
 
 #### Beta Testing with colleagues (following the Software testing success criteria table):
-Link to the desmontration video:...
+Link to the desmontration video: https://www.youtube.com/watch?v=fdk8MJdTY0A&ab_channel=TheWeeklyShow
 
 #### Acceptance Testing with client (following User acceptance testing table):
 Link to the desmontration video:...
