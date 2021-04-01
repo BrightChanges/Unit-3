@@ -8,14 +8,15 @@
 
 ```.py
 
-File=[["6"],
+File=[["7"],
       ["67316", "081019889", "SARS", "POS"], #this is the first valid postive tested patient =>counted toward the statistic
       ["67317", "081029889", "SARS", "POS"], #this is the second valid positive tested patient =>counted toward the statistic
       ["27593", "170814119", "SARS", "NEG"], #this is the third valid negative tested patient =>counted toward the statistic
-      ["27593", "170814119", "SARS", "POS"], #invalid data record with duplicate SampleID =>counted toward the statistic
-      ["222", "CONTROL", "SARS", "POS"], #invalid data record with patientID as CONTROL =>counted toward the statistic
-      ["223", "17081411", "CRO", "POS"], #invalid data record with Analysis as not SARS =>counted toward the statistic
-      ["224", "17091411", "SARS", "ERR"]] #invalid data record with Result as ERR =>counted toward the statistic
+      ["27593", "170814119", "SARS", "POS"],
+      ["222", "CONTROL", "SARS", "POS"],
+      ["223", "17081411", "CRO", "POS"],
+      ["224", "17091411", "SARS", "ERR"]]
+
 
 SampleID = []
 
@@ -35,15 +36,14 @@ class quiz26():
 
             SampleID.append(self.file[i][0])
 
-            if "POS" in self.file[i]:
+            if self.file[i][1] == "CONTROL" or self.file[i][3] == "ERR" or self.file[i][2] != "SARS" or SampleID.count(self.file[i][0]) > 1:
+                invalid_sample_num += 1
 
-                if self.file[i][1] == "CONTROL" or self.file[i][3] == "ERR" or self.file[i][
-                    2] != "SARS" or SampleID.count(self.file[i][0]) > 1:
-                    positive_patient_num += 0
-                    invalid_sample_num += 1
-                else:
+            else:
+                if "POS" in self.file[i]:
                     positive_patient_num += 1
 
+        print(invalid_sample_num)
         valid_num_sample = int(num_sample) - invalid_sample_num
         positive_rate = positive_patient_num / int(valid_num_sample) * 100
 
@@ -60,4 +60,4 @@ test1.covid_statistic()
 
 ##### Testing:
 
-![](https://github.com/BrightChanges/Unit-3/blob/main/Screen%20Shot%200003-04-01%20at%2016.42.24.png)
+![](https://github.com/BrightChanges/Unit-3/blob/main/Screen%20Shot%200003-04-01%20at%2016.52.53.png)
