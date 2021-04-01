@@ -12,10 +12,10 @@ File=[["7"],
       ["67316", "081019889", "SARS", "POS"], #this is the first valid postive tested patient =>counted toward the statistic
       ["67317", "081029889", "SARS", "POS"], #this is the second valid positive tested patient =>counted toward the statistic
       ["27593", "170814119", "SARS", "NEG"], #this is the third valid negative tested patient =>counted toward the statistic
-      ["27593", "170814119", "SARS", "POS"],
-      ["222", "CONTROL", "SARS", "POS"],
-      ["223", "17081411", "CRO", "POS"],
-      ["224", "17091411", "SARS", "ERR"]]
+      ["27593", "170814119", "SARS", "POS"], #invalid data record with duplicate SampleID =>counted toward the statistic
+      ["222", "CONTROL", "SARS", "POS"], #invalid data record with patientID as CONTROL =>counted toward the statistic
+      ["223", "17081411", "CRO", "POS"], #invalid data record with Analysis as not SARS =>counted toward the statistic
+      ["224", "17091411", "SARS", "ERR"]] #invalid data record with Result as ERR =>counted toward the statistic
 
 
 SampleID = []
