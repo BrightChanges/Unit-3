@@ -43,7 +43,7 @@ class quiz26():
                 if "POS" in self.file[i]:
                     positive_patient_num += 1
 
-        print(invalid_sample_num)
+        #print(invalid_sample_num)
         valid_num_sample = int(num_sample) - invalid_sample_num
         positive_rate = positive_patient_num / int(valid_num_sample) * 100
 
