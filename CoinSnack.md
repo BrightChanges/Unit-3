@@ -40,11 +40,12 @@ Fig.4 ER Diagram of CoinSnack app's database
 
 #### Codes:
 
--main.py:
+-main.py (with hashed/salt encrypted password):
 
 ```.py
 
-#Importing all the necessary libraries or widgets'codes
+##WORKING IN PROGRESS!!!
+import hashlib, binascii, os
 from kivy.lang import Builder
 from sqlalchemy import Column, DateTime, String, Integer, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
@@ -65,16 +66,13 @@ from kivy.uix.label import Label
 from datetime import date
 from kivymd.uix.list import OneLineListItem
 
-#creating a base to connect with the database
 Base = declarative_base()
 
 
-#creating a screen manager for kivy
 class ScreenManagement(ScreenManager):
     pass
 
 
-#creating the table user in the database
 class User(Base):
     __tablename__ = 'user'
     id = Column(Integer, primary_key=True, unique=True)
@@ -83,11 +81,11 @@ class User(Base):
     delivery_location = Column(String)
 
 
-    #the relationship between the user table and the snack table is one-to-many:
+    # relationship "has in the ER diagram" one-to-many
     snacks = relationship("Snack", backref="user")
 
 
-#creating the table snack in the database
+#Need to update the ER Diagram on Github!
 class Snack(Base):
     __tablename__ = "snack"
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -107,38 +105,25 @@ from sqlalchemy.orm import sessionmaker
 session = sessionmaker()
 session.configure(bind=engine)
 Base.metadata.create_all(engine)
-##
 
-#creating the backend code for Kivy's ImageScreen
+
 class ImageScreen(MDScreen):
-    
-    #functions like one below could initiate some kind of actions to the app when 
-    #they are called from buttons in the kivy file (main.kv).
+
     def go_back_to_order(self):
-    
-        #codes like one below switch screen for the app
         self.parent.current = "SnackScreen"
 
 
-#creating the backend code for Kivy's MyAccountScreen
+
 class MyAccountScreen(MDScreen):
-    
-    #initilization functions like the one below initialize items that could be resused in other function.
-    #an extremely helpful function to stores data temporarily and let other function acesss them.
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.delivery_location = LoginScreen.delivery_location
         self.email = LoginScreen.email
-    
-    #this function on_pre_enter is a special kivy function that automatically
-    #initiate a function once an user enter a screen.
+
     def on_pre_enter(self, *args):
         self.my_account()
-    
+
     def my_account(self):
-        
-        #by taking the ids of the text from the kivy file, I could display the text from 
-        #the backend python file (main.py) to the front end kivy screen (main.kv)
         self.ids.delivery_location.text = f"Your delivery location: {LoginScreen.delivery_location}"
         self.ids.email.text = f"Your email: {LoginScreen.email}"
 
@@ -147,7 +132,7 @@ class MyAccountScreen(MDScreen):
 
 
 
-#creating the backend code for Kivy's ThankyouScreen
+
 class ThankyouScreen(MDScreen):
 
     def __init__(self, **kwargs):
@@ -159,7 +144,6 @@ class ThankyouScreen(MDScreen):
         self.thankyou()
 
     def thankyou(self):
-        #remove space from the LoginScreen.delivery_location (which is a string)
         LoginScreen.delivery_location.strip()
         self.ids.location_thankyou.text = f"Your order will arrived to your delivery location ( {LoginScreen.delivery_location}) in under 30 minutes."
 
@@ -167,7 +151,7 @@ class ThankyouScreen(MDScreen):
         self.parent.current = "HomeScreen"
 
 
-#creating the backend code for Kivy's CheckoutScreen
+
 class CheckoutScreen(MDScreen):
 
     def __init__(self, **kwargs):
@@ -180,21 +164,13 @@ class CheckoutScreen(MDScreen):
 
 
     def checkout(self):
-        #creating a blank string called order_list to stores the receipts information the user ordered
         order_list = ""
-        #initialize the price variable so that I could used it later on.
         price = 0
-        
-        #creating connection to my database
         s = session()
-        
-        #a query command that query all the rows in the database table snack that have user_id equal to the user id of the current_id
         order_check = s.query(Snack).filter_by(user_id=LoginScreen.current_user).all()
 
         print(f"Delivery location is at {LoginScreen.delivery_location}")
         print(f"Total order of user with id {LoginScreen.delivery_location}:")
-        
-        #as order_check are multiple data rows, I need to use a for loop to get each variable of each row out for printing
         for i in range(len(order_check)):
             order_list += '\n' + "| No."+ str(i+1) + " | " + "Name: " + str(order_check[i].name).capitalize() + "| Amount: " + str(order_check[i].amount) + " | Price: " + str(order_check[i].price)+"¥ |"
             price += order_check[i].price
@@ -214,9 +190,9 @@ class CheckoutScreen(MDScreen):
     def go_back_to_order(self):
         self.parent.current = "SnackScreen"
 
-
-#creating the backend code for Kivy's SnackScreen
 class SnackScreen(MDScreen):
+
+    # string123 = StringProperty("")
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -230,19 +206,18 @@ class SnackScreen(MDScreen):
         self.parent.current = "CheckoutScreen"
 
     def add_to_cart(self):
-        #initialize the pricce of each product
         price_per_product = 0
         print("Add to cart button was pressed")
+        # print(LoginScreen.current_user) #LoginScreen.current_user is the id of the user
         user_id = LoginScreen.current_user
         snack_name = self.ids.snack_name.text
         amount = self.ids.snack_amount.text
-        
-        #validation process codes to ensure that inputs form the user is valid:
+
         if snack_name != "Hamburger" and snack_name != "hamburger" and snack_name != "Coke" and snack_name != "coke" and snack_name!= "Popcorn"\
                 and snack_name!="popcorn":
 
             print("Invalid food order")
-        
+
         elif amount.isnumeric() == False:
             print("Invalid amount")
 
@@ -251,7 +226,6 @@ class SnackScreen(MDScreen):
             if int(amount) > 50 or int(amount) < 1:
                 print("The ordering amount is too much or too little.")
             else:
-                # if user inputs are valid, further processed (including adding the data to the database) will be proceeded
                 if (snack_name == "Hamburger" or snack_name ==  "hamburger"):
                     price_per_product = 300
 
@@ -278,7 +252,8 @@ class SnackScreen(MDScreen):
         self.parent.current = "HomeScreen"
 
 
-#creating the backend code for Kivy's HomeScreen
+
+
 class HomeScreen(MDScreen):
 
     def my_account(self):
@@ -303,31 +278,37 @@ class RegisterScreen(MDScreen):
         password_add = self.ids.password_input.text
         password_repeat = self.ids.password_check.text
         print(email, delivery_location, password_add, password_repeat)
-        
-        #checking if the user had input 2 same password
+
         if password_add == password_repeat:
             s = session()
             email = self.ids.email_input.text
             password = self.ids.password_input.text
             print(email, password)
-            
-            #checking if the registering email is already in the database or not
+
             email_check = s.query(User).filter_by(email=email).first()  ##similar to fetchone()
 
             if email_check:
                 print("User already exists")
                 s.close()
-            
+
             #make sure that the input for the registering email address from the user is at an email
             elif "@" not in email:
                 self.ids.email_input.error = True
                 self.ids.email_input.helper_text = "Email is not valid"
                 print("Email is invalid")
-                
+
             else:
-                #if the registering email is not already registered in the database,
-                #the software will create the account for the user
-                user = User(email=email, delivery_location=delivery_location, password=password)
+                salt = hashlib.sha256(os.urandom(60)).hexdigest().encode(
+                    'ascii')  # hashing a ramdom sequence with 60 bits: produces 256 bits or 64 hex chars
+
+                pwdhash = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'),
+                                              salt, 100000)
+
+                pwdhash = binascii.hexlify(pwdhash)
+
+                hashed_password = (salt + pwdhash).decode('ascii')
+
+                user = User(email=email, delivery_location=delivery_location, password=hashed_password) #change password=hashed_password
                 s.add(user)
 
                 s.commit()
@@ -342,16 +323,12 @@ class RegisterScreen(MDScreen):
         self.parent.current = "LoginScreen"
 
 
-#a class for a ButtonLabel in the kifvy file (main.kv)
 class ButtonLabel(ButtonBehavior, MDLabel):
     pass
 
 
-#creating the backend code for Kivy's LoginScreen
 class LoginScreen(MDScreen):
-    # all 3 codes below set up variables that store user information after the user logged in 
-    #through the LoginScreen
-    current_user = None 
+    current_user = None
     delivery_location = None
     email = None
 
@@ -360,32 +337,42 @@ class LoginScreen(MDScreen):
         password = self.ids.password_input.text
         print(email,password)
         s = session()
-        user_check = s.query(User).filter_by(email=email, password=password).first()
-        print(user_check)
 
-        if user_check:
+        user_check = s.query(User).filter_by(email=email).first()
+
+        stored_password = user_check.password
+
+        salt = stored_password[:64]
+        stored_password = stored_password[64:]
+
+        pwdhash = hashlib.pbkdf2_hmac('sha256',
+                                      password.encode('utf-8'),
+                                      salt.encode('ascii'),
+                                      100000)
+
+        pwdhash = binascii.hexlify(pwdhash).decode('ascii')
+
+        if pwdhash == stored_password:
             s.close()
             print(f"login successful for user with email {email}")
-            LoginScreen.current_user = user_check.id  # getting the id of the current user
+            LoginScreen.current_user = user_check.id  # getting the ide of the current user
             LoginScreen.delivery_location = user_check.delivery_location  # getting the deliver location of the current user
-            LoginScreen.email = user_check.email #getting the email of the current user
+            LoginScreen.email = user_check.email  # getting the email of the user
             self.parent.current = "HomeScreen"
-
         else:
             print("User does not exist or wrong password/email")
 
+    
 
-#creating the backend code for Kivy's whole app
+
 class MainApp(MDApp):
 
     def build(self):
         self.theme_cls.primary_palette = "Indigo"
 
 
-#The code that will run the whole Kivy's app
+
 MainApp().run()
-
-
 
 
 
