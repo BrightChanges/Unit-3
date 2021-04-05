@@ -9,17 +9,25 @@
 
 ```.py
 
+#TASK: https://docs.google.com/presentation/d/1UM2YhbMQ3aSwWPUbhLs0PvUREkstN_mZLQgBblLl6WA/edit#slide=id.p
+
 class quiz22():
 
     def __init__(self, S):
         self.S = S
 
     def function(self):
+        
+        #the reason why we need to split the string and then add
+        #them in the end to the output is because we 
+        #don't want to output them in a group of separate strings
         output=[]
         S_list = self.S.split()
 
         for i in range(len(S_list)):
 
+            #the code below counts the length of all the character
+            #between the first and the last character of the input string
             middle_length = len(S_list[i][1:-1])
 
             if middle_length == 0:
@@ -31,6 +39,7 @@ class quiz22():
                 output.append(str(S_list[i]))
 
         output = " ".join(output)
+
         return output
 
 
@@ -45,7 +54,6 @@ print(test3.function())
 
 test4= quiz22("(codin) + (game) = (codingame)")
 print(test4.function())
-
 ```
 
 ##### Testing:
