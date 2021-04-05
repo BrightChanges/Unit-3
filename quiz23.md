@@ -8,6 +8,9 @@
 
 ```.py
 
+#TASK: Write a function that checks if a triangle can be built using three integers a, b, c, which are the sides of the triangles
+
+
 class quiz23():
 
     def __init__(self, A,B,C):
@@ -16,6 +19,9 @@ class quiz23():
         self.C = C
 
     def function(self):
+        #in Math, every side of a triangle needs to be smaller than
+        #the sum of the other two sides.
+        #the if statement below is constructed based on that rule:
         if (self.A+self.B)>self.C and (self.B+self.C)>self.A and (self.A+self.C)>self.B:
             return True
 
@@ -34,6 +40,12 @@ print(test2.function())
 
 test1 = quiz23(3,9,2)
 print(test1.function())
+
+
+
+
+
+
 
 ```
 
